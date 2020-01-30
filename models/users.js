@@ -78,9 +78,15 @@ var loginSchema = new mongoose.Schema({
     },
     isVerifed: {
         type: Boolean,
+        default: false,
         required: true
     },
     isActive: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    isDoingJob: {
         type: Boolean,
         required: true
     },
