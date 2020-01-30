@@ -1,0 +1,32 @@
+{
+  "name": "matrimonial-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishabh-1999/Matrimonial-Website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rishabh-1999/Matrimonial-Website/issues"
+  },
+  "homepage": "https://github.com/Rishabh-1999/Matrimonial-Website#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "http": "0.0.0",
+    "mongoose": "^5.8.10",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0"
+  }
+}
