@@ -40,9 +40,28 @@ app.use(
         extended: true
     })
 );
+
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+/* Routing Implementation */
+app.use("/userTable", require("./router/userstable"));
+
+/* Middleware */
+var middleware = require("./middlewares/middleware");
+
+app.get("/", function (req, res) {
+    res.render("login");
+});
+
+app.get("/home", middleware.checkSession, function (req, res) {
+    res.render("home");
+});
+
+app.get("/adddetails", middleware.checkSession, function (req, res) {
+    res.render("adddetails");
+});
 
 server.listen(PORT, () => {
     console.log("Running on port: " + PORT);

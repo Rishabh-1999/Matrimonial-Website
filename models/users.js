@@ -64,6 +64,10 @@ var loginSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     address1: {
         type: String,
         trim: true
