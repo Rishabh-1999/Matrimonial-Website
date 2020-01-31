@@ -21,6 +21,12 @@ var controllers = require('../controllers');
 // Middleware
 var middleware = require("../middlewares/middleware");
 
+app.get('/register', function(req,res) {
+  res.render('registerUser');
+})
+
+// Controllers //
+
 /* POST Check Login */
 app.post("/checkLogin", controllers.users.checkLogin);
 

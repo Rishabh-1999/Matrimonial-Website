@@ -12,7 +12,7 @@ mongoose.connect(
   },
   err => {
     if (!err) {
-      console.log("MongoDB connected");
+      console.log("Database connected");
     } else {
       console.log("Error: " + err);
     }
