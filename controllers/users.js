@@ -1,8 +1,6 @@
 var Users = require("../models/users");
 const saltRounds = 10;
 
-module.exports.register = async function (req, res) {};
-
 module.exports.checkLogin = async function (req, res) {
     Users.find({
                 email: req.body.email,
@@ -36,3 +34,13 @@ module.exports.checkLogin = async function (req, res) {
             res.send(error);
         });
 };
+
+exports.registerUser = async function (req, res) {
+      Users.create(req.body,function(error,result)
+      {
+        if(error)
+        throw error;
+        else{}
+      })
+      res.send("data saved");         
+  } 

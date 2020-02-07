@@ -30,4 +30,7 @@ app.get('/register', function(req,res) {
 /* POST Check Login */
 app.post("/checkLogin", controllers.users.checkLogin);
 
+/* User Register Himself/Herself */
+app.post("/registerUser", controllers.users.registerUser);
+
 module.exports = app;
