@@ -1,5 +1,5 @@
 var users = require("./users");
 
-module.exports={
+module.exports = {
 	users,
 }

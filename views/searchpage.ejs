@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search :</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/range.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <% include paritials/navbar.ejs %>
+    <!-- Info Modal -->
+    <div class="modal fade" id="filter" role="dialog" style="z-index: 9999; display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="font-weight:bold;">Filter</h3>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-auto my-1">
+                        <div class="container-fluid m-2">
+                            <div id="rangeBox">
+                                <label>Age</label>
+                                <div id="sliderBox">
+                                    <input type="range" id="slider0to50" step="5" min="0" max="50" />
+                                    <input type="range" id="slider51to100" step="5" min="50" max="100" />
+                                </div>
+                                <div id="inputRange">
+                                    <input type="number" step="5" min="0" max="50" placeholder="Min" id="min" />
+                                    <input type="number" step="5" min="51" max="100" placeholder="Max" id="max" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Education</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected>Choose...</option>
+                                <option value="1">10th</option>
+                                <option value="2">12th</option>
+                                <option value="3">Graduate</option>
+                                <option value="3">Post-Graduate</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Religion</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected>Choose...</option>
+                                <option value="1">Hindu</option>
+                                <option value="2">Muslim</option>
+                                <option value="3">Christanity</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Education</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option selected>Choose...</option>
+                                <option value="1">10th</option>
+                                <option value="2">12th</option>
+                                <option value="3">Graduate</option>
+                                <option value="3">Post-Graduate</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Height</label>
+                            <br />
+
+                            <input type="text" value="" />
+                        </div>
+
+                        <div class="col-auto my-1">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-default">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-5 col-12 d-inline-flex">
+        <div class="row col-10">
+            <input class="form-control col-10" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+        <a class="nav-link col-2" href="#" data-toggle="modal" data-target="#filter">
+            <i class="fa fa-filter logo" style="font-size: 25px;"></i>
+        </a>
+    </div>
+    <div class="container-fluid m-2 p-2">
+        <div class="container mr-auto border border-dark rounded">
+            <div id="can-create-community">
+                <div class="col-sm-12" style="display: flex;">
+                    <div class="col-sm-2" style="padding:10px;flex:1;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Salman_Khan_filmfare.jpg"
+                            class="cpic img-fluid" style="width: 200px;height: 200px;" />
+                    </div>
+
+                    <div class="col-sm-10 text-lg-left" style="padding:20px;">
+                        <h4><b>Name :</b>Salaman Khan</h4>
+                        <h4><b>Age :</b>21</h4>
+                        <h4><b>Hightest Education :</b>10th</h4>
+                        <h4><b>Religion :</b>Hindu</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var sliderLeft = document.getElementById("slider0to50");
+        var sliderRight = document.getElementById("slider51to100");
+        var inputMin = document.getElementById("min");
+        var inputMax = document.getElementById("max");
+
+        ///value updation from input to slider
+        //function input update to slider
+        function sliderLeftInput() {
+            //input udate slider left
+            sliderLeft.value = inputMin.value;
+        }
+
+        function sliderRightInput() {
+            //input update slider right
+            sliderRight.value = inputMax.value; //chnage in input max updated in slider right
+        }
+
+        //calling function on change of inputs to update in slider
+        inputMin.addEventListener("change", sliderLeftInput);
+        inputMax.addEventListener("change", sliderRightInput);
+
+        ///value updation from slider to input
+        //functions to update from slider to inputs
+        function inputMinSliderLeft() {
+            //slider update inputs
+            inputMin.value = sliderLeft.value;
+        }
+
+        function inputMaxSliderRight() {
+            //slider update inputs
+            inputMax.value = sliderRight.value;
+        }
+        sliderLeft.addEventListener("change", inputMinSliderLeft);
+        sliderRight.addEventListener("change", inputMaxSliderRight);
+    </script>
+</body>
+
+</html>

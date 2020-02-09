@@ -1,0 +1,47 @@
+#rangeBox {
+    /* carry complete  range box*/
+    width: 300px;
+    height: 100px;
+}
+
+#sliderBox {
+    position: relative;
+    top: 0%;
+    width: 300px;
+    /*2x width*/
+}
+
+#slider0to50 {
+    width: 150px;
+    /*1x width*/
+    position: absolute;
+    left: 0%;
+}
+
+#slider51to100 {
+    width: 150px;
+    /*1x width*/
+    position: absolute;
+    left: 50%;
+}
+
+#inputRange {
+    position: relative;
+    top: 50%;
+}
+
+#inputRange::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+#inputRange #min {
+    width: 40%;
+    float: left;
+}
+
+#inputRange #max {
+    width: 40%;
+    float: right;
+}

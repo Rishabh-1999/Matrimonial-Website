@@ -56,11 +56,32 @@ app.get("/", function (req, res) {
 });
 
 app.get("/home", middleware.checkSession, function (req, res) {
-    res.render("home");
+    res.render("home", {
+        data: req.session.data
+    });
+});
+
+var Users = require("./models/users");
+
+app.get("/peronaldetails", middleware.checkSession, function (req, res) {
+    Users.findOne({
+        _id: req.session._id
+    }).populate("personaldetails").exec(function (err, result) {
+        if (err)
+            console.log(result);
+    });
+});
+
+app.get("/searchpage", middleware.checkSession, function (req, res) {
+    res.render("searchpage", {
+        data: req.session.data
+    });
 });
 
 app.get("/adddetails", middleware.checkSession, function (req, res) {
-    res.render("adddetails");
+    res.render("adddetails", {
+        data: req.session.data
+    });
 });
 
 server.listen(PORT, () => {

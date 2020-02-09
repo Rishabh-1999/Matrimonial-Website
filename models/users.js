@@ -1,5 +1,9 @@
 var mongoose = require("mongoose");
 
+var Personal = require("./personaldetails");
+
+const GENDERS = ["Male", "Female"];
+
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
@@ -7,19 +11,6 @@ var loginSchema = new mongoose.Schema({
     firstname: {
         type: String,
         required: true,
-        trim: true
-    },
-    middlename: {
-        type: String,
-        trim: true
-    },
-    lastname: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    religion: {
-        type: String,
         trim: true
     },
     email: {
@@ -30,54 +21,24 @@ var loginSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        required: true,
+        enum: ["Male", "Female"],
+        required: true
     },
     password: {
         type: String,
         required: true,
         select: false
     },
-    DOB: {
-        type: String,
-    },
-    mothertongue: {
-        type: String,
-        trim: true
-    },
-    phoneno: {
-        type: String,
-        trim: true
-    },
     photourl: {
         type: String,
         trim: true
     },
-    education: {
-        type: String,
-        trim: true
-    },
-    height: {
-        type: String,
-        trim: true
-    },
-    weight: {
-        type: String,
-        trim: true
+    personaldetails: {
+        'type': mongoose.Schema.Types.ObjectId,
+        'ref': Personal,
     },
     type: {
         type: String,
-    },
-    address1: {
-        type: String,
-        trim: true
-    },
-    city: {
-        type: String,
-        trim: true
-    },
-    state: {
-        type: String,
-        trim: true
     },
     isVerifed: {
         type: Boolean,
@@ -86,9 +47,6 @@ var loginSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: false,
-    },
-    isDoingJob: {
-        type: Boolean,
     },
 });
 
