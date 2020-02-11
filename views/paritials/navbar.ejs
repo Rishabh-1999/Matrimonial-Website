@@ -33,9 +33,32 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Setting</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" onclick=logoutPerson()>Log Out</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
+<script>
+    function logoutPerson() {
+         $.confirm({
+    theme: 'supervan',
+    title: 'Confirm Logout!',
+    content: 'Do you really want logout?',
+    draggable: true,
+    buttons: {
+        Yes: {
+            action: function () {
+             window.location = "/userTable/logout_person";
+        }
+    },
+        No: {
+             action: function () {
+            
+        }
+    },
+    }
+    });
+    }
+</script>

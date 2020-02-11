@@ -1,6 +1,7 @@
 const express = require("express");
 var bodyParser = require("body-parser");
 const app = express.Router();
+let path = require('path');
 
 // parse application/x-www-form-urlencoded
 app.use(
@@ -11,7 +12,7 @@ app.use(
 
 // parse application/json
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname,'../public')));
 // Models
 var Users = require("../models/users");
 
@@ -32,5 +33,8 @@ app.post("/checkLogin", controllers.users.checkLogin);
 
 /* User Register Himself/Herself */
 app.post("/registerUser", controllers.users.registerUser);
+
+/* logout person */
+app.use("/logout_person", controllers.users.logout_person);
 
 module.exports = app;

@@ -1,7 +1,5 @@
 var Users = require("../models/users");
 var Personal = require("../models/personaldetails");
-var mongoose = require("mongoose")
-const saltRounds = 10;
 
 module.exports.checkLogin = async function (req, res) {
     Users.findOne({
@@ -73,3 +71,9 @@ exports.registerUser = async function (req, res) {
         });
     res.send("data saved");
 };
+
+exports.logout_person = (req,res) => {
+    req.session.isLogin = 0;
+    req.session.destroy();
+    res.render('login');
+}
