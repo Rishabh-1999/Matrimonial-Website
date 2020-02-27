@@ -72,7 +72,57 @@ exports.registerUser = async function (req, res) {
     res.send("data saved");
 };
 
-exports.logout_person = (req,res) => {
+exports.getAllByPagingfunction = async function (req, res, next) {
+
+    Users.find({
+        gender: req.session.gender == "Male" ? "Male" : "Female"
+    }).populate(
+        "personaldetails"
+    ).skip(req.body.start).limit(req.body.end).exec(function (error, result) {
+        if (error)
+            console.log(error)
+        res.send(result);
+    })
+}
+
+exports.getLimitedByPagingfunction = async function (req, res, next) {
+
+    console.log(req.body);
+    let query = {};
+
+    if (req.body.religion && req.body.minage && req.body.maxage && req.body.education) {
+        query = {
+            religion: req.body.religion,
+            "age": {
+                $gt: parseInt(req.body.minage),
+                $lt: parseInt(req.body.maxage)
+            },
+            "education": req.body.education,
+        };
+    }
+
+    console.log(query);
+
+    Users.find({
+        gender: req.session.gender == "Male" ? "Male" : "Female"
+    }).populate({
+        path: "personaldetails",
+        model: "personaldetails",
+        match: query
+    }).skip(req.body.start).limit(req.body.end).exec(function (error, result) {
+        if (error)
+            console.log(error)
+
+        //console.log(result)
+        result = result.filter(function (r) {
+            return r.personaldetails != null;
+        })
+        //console.log(result)
+        res.send(result);
+    })
+}
+
+exports.logout_person = (req, res) => {
     req.session.isLogin = 0;
     req.session.destroy();
     res.render('login');

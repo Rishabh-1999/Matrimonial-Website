@@ -11,8 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="/script/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </head>
 
 <body>
@@ -43,33 +43,22 @@
 
                         <div>
                             <label>Education</label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <select class="custom-select mr-sm-2" id="education">
                                 <option selected>Choose...</option>
-                                <option value="1">10th</option>
-                                <option value="2">12th</option>
-                                <option value="3">Graduate</option>
-                                <option value="3">Post-Graduate</option>
+                                <option value="10th">10th</option>
+                                <option value="12th">12th</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Post-Graduate">Post-Graduate</option>
                             </select>
                         </div>
 
                         <div>
                             <label>Religion</label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <select class="custom-select mr-sm-2" id="religion">
                                 <option selected>Choose...</option>
-                                <option value="1">Hindu</option>
-                                <option value="2">Muslim</option>
-                                <option value="3">Christanity</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label>Education</label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected>Choose...</option>
-                                <option value="1">10th</option>
-                                <option value="2">12th</option>
-                                <option value="3">Graduate</option>
-                                <option value="3">Post-Graduate</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Muslim">Muslim</option>
+                                <option value="Christanity">Christanity</option>
                             </select>
                         </div>
 
@@ -91,7 +80,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close
                     </button>
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default" onclick="searchdata()">
                         Search
                     </button>
                 </div>
@@ -100,15 +89,16 @@
     </div>
     <div class="container-fluid p-5 col-12 d-inline-flex">
         <div class="row col-10">
-            <input class="form-control col-10" type="search" placeholder="Search" aria-label="Search" />
+            <input class="form-control col-10" id="searchinput" type="search" placeholder="Search"
+                aria-label="Search" />
             <button class="btn btn-outline-success" type="submit">Search</button>
         </div>
         <a class="nav-link col-2" href="#" data-toggle="modal" data-target="#filter">
             <i class="fa fa-filter logo" style="font-size: 25px;"></i>
         </a>
     </div>
-    <div class="container-fluid m-2 p-2">
-        <div class="container mr-auto border border-dark rounded">
+    <div class="container-fluid m-2 p-2" id="maincontainer">
+        <!-- <div class="container mr-auto border border-dark rounded">
             <div id="can-create-community">
                 <div class="col-sm-12" style="display: flex;">
                     <div class="col-sm-2" style="padding:10px;flex:1;">
@@ -124,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -162,6 +152,132 @@
         }
         sliderLeft.addEventListener("change", inputMinSliderLeft);
         sliderRight.addEventListener("change", inputMaxSliderRight);
+
+        //start here
+
+        var start = 0;
+        var end = 4;
+        var tempdata = [];
+
+        var totaldata;
+        $(document).ready(function () {
+            initalise();
+        })
+
+        function initalise() {
+            let obj = {
+                start: start,
+                end: end,
+            }
+            document.getElementById("maincontainer").innerHTML = "";
+            document.getElementById('searchinput').innerHTML = "";
+            var xml = new XMLHttpRequest()
+            xml.open("POST", "/userTable/getAllByPagingfunction")
+            xml.onload = function () {
+                document.getElementById('searchinput').innerHTML = "";
+                var d = JSON.parse(xml.responseText);
+                console.log(d);
+                tempdata = d;
+                for (var i = 0; i < tempdata.length; i++) {
+                    addToDOM(tempdata[i])
+                }
+
+            }
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send(JSON.stringify(obj));
+        }
+
+        function searchdata() {
+            let obj = {
+                minage: document.getElementById("min").value,
+                maxage: document.getElementById("max").value,
+                education: document.getElementById("education").value,
+                religion: document.getElementById("religion").value,
+                start: start,
+                end: end,
+            }
+            document.getElementById('searchinput').innerHTML = "";
+            document.getElementById("maincontainer").innerHTML = ""
+            var xml = new XMLHttpRequest()
+            xml.open("POST", "/userTable/getLimitedByPagingfunction")
+            xml.onload = function () {
+                document.getElementById('searchinput').innerHTML = "";
+                var d = JSON.parse(xml.responseText);
+                if (d == [] || d == null)
+                    return;
+                console.log(d);
+                tempdata = d;
+                for (var i = 0; i < tempdata.length; i++) {
+                    addToDOM(tempdata[i])
+                }
+
+            }
+            xml.setRequestHeader("Content-Type", "application/json");
+            console.log(obj)
+            xml.send(JSON.stringify(obj));
+        }
+
+        function getDocumentHeight() {
+            console.log("getDocumentHeight");
+            const body = document.body;
+            const html = document.documentElement;
+
+            return Math.max(
+                body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight
+            );
+        }
+
+        function getScrollTop() {
+            return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body
+                .parentNode || document.body).scrollTop;
+        }
+
+        window.onscroll = function () {
+            if (getScrollTop() == getDocumentHeight() - window.innerHeight) {
+                start += 4;
+                end = 4;
+                initalise();
+            } else
+                return;
+        }
+
+        function addToDOM(obj) {
+            var div1 = `<div class="container mr-auto border border-dark rounded">
+            <div id="can-create-community">
+                <div class="col-sm-12" style="display: flex;">
+                    <div class="col-sm-2" style="padding:10px;flex:1;">
+                        <img src="${obj.photourl}"
+                            class="cpic img-fluid" style="width: 200px;height: 200px;" />
+                    </div>
+
+                    <div class="col-sm-10 text-lg-left" style="padding:20px;">
+                        <h4><b>Name :</b>${obj.firstname} ${obj.personaldetails.lastname}</h4>
+                        <h4><b>Age :</b>${obj.personaldetails.age}</h4>
+                        <h4><b>Hightest Education :</b>${obj.personaldetails.education}</h4>
+                        <h4><b>Religion :</b>${obj.personaldetails.religion}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>`
+            document.getElementById('maincontainer').innerHTML = document.getElementById('maincontainer').innerHTML +
+                div1;
+        }
+
+        function closeDragElement() {
+            /* stop moving when mouse button is released:*/
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+        document.getElementById('searchinput').onkeyup = function () {
+            document.getElementById('search').innerHTML = ""
+            var val = document.getElementById('searchinput').value;
+            for (i in tempdata) {
+
+                if ((tempdata[i].name).includes(val) || (tempdata[i].description).includes(val))
+                    addToDOM(tempdata[i])
+            }
+        }
     </script>
 </body>
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home : </title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 mx-auto">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h1 class="text-center display-3" sty>
+                            <i class="fa fa-pagelines"></i>
+                        </h1>
+                        <h5 class="text-center"> Add Details Here </h5>
+                        <form method="POST" action="/user/register">
+                            <div class="form-label-group">
+                                <label>First Name</label>
+                                <input type="name" id="firstname" readonly class="form-control disabled"
+                                    name="firstname" placeholder="Name" value="<%= data.firstname %>" required
+                                    autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label>Middle Name</label>
+                                <input type="name" id="middlename" class="form-control" name="middlename"
+                                    placeholder="Name" required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label>Last Name</label>
+                                <input type="name" readonly id="lastname" value="<%= data.lastname %>"
+                                    class="form-control" name="lastname" placeholder="Name" required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label> Email address </label>
+                                <input type="email" readonly id="email" class="form-control disabled" name="email"
+                                    placeholder="Email address" required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label> Phone No. </label>
+                                <input type="number" id="phoneno" class="form-control" name="phoneno"
+                                    placeholder="Phone No." required />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Gender</label>
+                                    <select class="form-control" id="gender" name="gender" required>
+                                        <option name="Male" selected>Male</option>
+                                        <option name="Female">Female</option>
+                                        <option name="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>DOB :</label>
+                                    <input class=" form-control dobDate" name="DOB" placeholder="MM/DD/YYYY" id="DOB"
+                                        type="date" autocomplete="off" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Address</label>
+                                <input type="text" class="form-control" id="address1" name="address1"
+                                    placeholder="Adress required" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">Gender</label>
+                                    <input type="text" readonly value="<%= data.gender %>" class="form-control"
+                                        id="gender" name="gender" required>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputZip">Zip</label>
+                                    <input type="text" name="zipcode" class="form-control" id="zipcode" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check" name="checkbox">
+                                    <input class="form-check-input" type="checkbox" name="check" id="checkbox" required>
+                                    <label class="form-check-label" for="invalidCheck2">
+                                        Agree to terms and conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div style="margin:10px;">
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="submit"
+                                    type="submit">
+                                    Register Here
+                                </button>
+                            </div>
+                        </form>
+                        <hr class="md-4" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
