@@ -8,7 +8,6 @@ submit.addEventListener("click", function () {
         xml.open("POST", "/userTable/checkLogin");
         xml.addEventListener("load", function () {
             var data = xml.responseText;
-            console.log(data)
             if (data === "Logined") {
                 window.location = "/home";
             } else if (data == "not") window.location = "/editprofile";
