@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+var Schema = mongoose.Schema;
 
 var personaldetailsSchema = new mongoose.Schema({
     middlename: {
@@ -39,7 +38,7 @@ var personaldetailsSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    weigth: {
+    weight: {
         type: String,
         trim: true
     },

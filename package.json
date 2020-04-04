@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,8 +26,9 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "http": "0.0.0",
-    "mongoose": "^5.8.11",
-    "morgan": "^1.9.1",
+    "mongoose": "^5.9.7",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0"
   }

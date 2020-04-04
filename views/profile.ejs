@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile - <%= data.firstname %></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+</head>
+
+<body>
+    <% include paritials/navbar.ejs %>
+
+    <div class="container-fluid">
+        <h1 class="h2 text-center">Update Profile</h1>
+        <div class="m-10">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <form> -->
+                    <div class="form-label-group">
+                        <label>*Photo URL</label>
+                        <input type="name" id="photourl" class="form-control" name="photourl" placeholder="photourl"
+                            value="<%= data.photourl %>" required autofocus />
+                    </div>
+                    <div class="form-label-group">
+                        <label>*First Name</label>
+                        <input type="name" id="firstname" readonly class="form-control disabled" name="firstname"
+                            placeholder="Name" value="<%= data.firstname %>" required autofocus />
+                    </div>
+                    <div class="form-label-group">
+                        <label>Middle Name</label>
+                        <input type="name" id="middlename" class="form-control" name="middlename" placeholder="Name"
+                            value="<%= data.personaldetails.middlename %>" autofocus />
+                    </div>
+                    <div class="form-label-group">
+                        <label>*Last Name</label>
+                        <input type="name" id="lastname" value="<%= data.personaldetails.lastname %>"
+                            class="form-control" name="lastname" placeholder="Name" required autofocus />
+                    </div>
+                    <div class="form-label-group">
+                        <label>*Email ID </label>
+                        <input type="email" readonly id="email" class="form-control disabled" name="email"
+                            value="<%= data.email %>" placeholder="Email address" required autofocus />
+                    </div>
+                    <div class="form-label-group">
+                        <label>*Phone No. </label>
+                        <input type="number" id="phoneno" class="form-control" name="phoneno"
+                            value="<%= data.personaldetails.phoneno %>" placeholder="Phone No." required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>*Gender</label>
+                            <select class="form-control" value="<%= data.gender %>" id="gender" name="gender" required>
+                                <option name="Male">Male</option>
+                                <option name="Female">Female</option>
+                                <option name="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>*Religion</label>
+                            <select class="form-control" value="<%= data.religion %>" id="religion" name="religion"
+                                required>
+                                <option name="Hindu">Hindu</option>
+                                <option name="Muslim">Muslim</option>
+                                <option name="Christianity">Christianity</option>
+                                <option name="Others">Others</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>*DOB :</label>
+                            <input type="date" class="form-control disabled dobDate"
+                                value="<%= data.personaldetails.DOB %>" id="DOB" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Mother Tongue</label>
+                        <input type="text" class="form-control" id="mothertongue" name="mothertongue"
+                            value="<%= data.personaldetails.mothertongue %>" placeholder="Mother Tongue">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Height :</label>
+                            <input type="text" class="form-control" value="<%= data.personaldetails.height %>"
+                                id="height">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Weight :</label>
+                            <input type="text" class="form-control" value="<%= data.personaldetails.weight %>"
+                                id="weight">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>*Doing Job :</label>
+                            <input type="checkbox" class="form-control" value="<%= data.personaldetails.isDoingJob %>"
+                                id="isDoingJob" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" class="form-control" id="address1" name="address1"
+                            value="<%= data.personaldetails.address1 %>" placeholder="Address">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="city" name="city"
+                                value="<%= data.personaldetails.city %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputZip">State</label>
+                            <input type="text" name="state" class="form-control" id="state"
+                                value="<%= data.personaldetails.state %>">
+                        </div>
+                    </div>
+                    <div style="margin:10px;">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" id="submit" type="submit">
+                            Update Profile
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("submit").addEventListener("click", function () {
+            var obj = new Object();
+            obj.firstname = document.getElementById("firstname").value;
+            obj.email = document.getElementById("email").value;
+            obj.gender = document.getElementById("gender").value;
+            obj.photourl = document.getElementById("photourl").value;
+            obj.DOB = document.getElementById("DOB").value;
+
+            obj.middlename = document.getElementById("middlename").value;
+            obj.lastname = document.getElementById("lastname").value;
+            obj.religion = document.getElementById("religion").value;
+            obj.mothertongue = document.getElementById("mothertongue").value;
+            obj.phoneno = document.getElementById("phoneno").value;
+            obj.height = document.getElementById("height").value;
+            obj.weight = document.getElementById("weight").value;
+            obj.address1 = document.getElementById("address1").value;
+            obj.city = document.getElementById("city").value;
+            obj.state = document.getElementById("state").value;
+            obj.isDoingJob = document.getElementById("isDoingJob").value;
+
+            var xml = new XMLHttpRequest();
+            xml.open("POST", "/userTable/updateprofile");
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.addEventListener('load', function () {
+                var result = xml.responseText;
+                console.log(result)
+                if (result == "1")
+                    window.location = "/home"
+                else
+                    window.alert("Due to Some to reason update failed")
+                //window
+            })
+            xml.send(JSON.stringify(obj));
+            console.log(obj)
+        })
+    </script>
+</body>
+
+</html>

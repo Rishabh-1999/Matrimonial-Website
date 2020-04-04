@@ -1,11 +1,17 @@
 function isAllowed(req, res, next) {
-    if (req.session.isLogin) res.redirect("/home");
-    else next();
+    if (req.session.isLogin)
+        next();
+    else
+        res.redirect("/");
 }
 
 function checkSession(req, res, next) {
-    if (req.session.isLogin) next();
-    else res.redirect("/");
+    if (req.session.isLogin) {
+        if (req.session.isVerfied == true)
+            next();
+        else
+            res.redirect("/profile")
+    } else res.redirect("/");
 }
 
 function checkAdmin(req, res, next) {

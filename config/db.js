@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
-var mongoDB = process.env.DB_MONGO;
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
 mongoose.set("useCreateIndex", true);
 
 mongoose.connect(
-  mongoDB,
-  {
+  process.env.DB_MONGO, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   },

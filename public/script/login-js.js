@@ -10,7 +10,7 @@ submit.addEventListener("click", function () {
             var data = xml.responseText;
             if (data === "Logined") {
                 window.location = "/home";
-            } else if (data == "not") window.location = "/editprofile";
+            } else if (data === "NoData") window.location = "/profile";
             else addInvalidDOM();
         });
         xml.setRequestHeader("Content-Type", "application/json");

@@ -1,16 +1,19 @@
+/* Models */
 var Users = require("../models/users");
 var Personal = require("../models/personaldetails");
 
 module.exports.checkLogin = async function (req, res) {
+    console.log(req.body)
     Users.findOne({
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
             },
             function (err, result) {
+                console.log(result)
                 if (result) {
                     req.session.isLogin = 1;
                     req.session._id = result._id;
-                    req.session.firstname = result.firstname;
+                    req.session.isVerfied = result.isVerfied;
 
                     var ob = new Object();
                     ob.firstname = result.firstname;
@@ -21,7 +24,12 @@ module.exports.checkLogin = async function (req, res) {
                     ob.DOB = result.DOB;
                     ob.type = result.type;
                     req.session.data = ob;
-                    res.send("Logined");
+                    console.log("------------" + result.isVerfied)
+                    if (result.isVerfied == true) {
+                        res.send("Logined")
+                    } else {
+                        res.send("NoData");
+                    }
                 }
             }
         )
@@ -126,4 +134,68 @@ exports.logout_person = (req, res) => {
     req.session.isLogin = 0;
     req.session.destroy();
     res.render('login');
+}
+
+exports.updateprofile = (req, res) => {
+    console.log(req.body);
+    // res.send("1")
+    if (req.body.firstname != null && req.body.email != null && req.body.gender != null &&
+        req.body.photourl != null && req.body.middlename != null && req.body.lastname &&
+        req.body.religion != null && req.body.DOB != null && req.body.mothertongue != null &&
+        req.body.phoneno != null && req.body.weight != null && req.body.height != null &&
+        req.body.address1 != null && req.body.city != null && req.body.state != null &&
+        req.body.isDoingJob != null
+    ) {
+        var user_obj = new Object();
+        user_obj.firstname = req.body.firstname;
+        user_obj.email = req.body.email;
+        user_obj.gender = req.body.gender;
+        user_obj.photourl = req.body.photourl;
+        user_obj.isVerfied = true;
+
+        Users.updateOne({
+            _id: req.session._id
+        }, user_obj).then(result => {
+            var personaldetails_obj = new Object();
+            personaldetails_obj.middlename = req.body.middlename;
+            personaldetails_obj.lastname = req.body.lastname;
+            personaldetails_obj.religion = req.body.religion;
+            personaldetails_obj.DOB = req.body.DOB;
+            personaldetails_obj.mothertongue = req.body.mothertongue;
+            personaldetails_obj.phoneno = req.body.phoneno;
+            // education: {
+            //     type: String,
+            //     trim: true
+            // },
+            personaldetails_obj.height = req.body.height;
+            personaldetails_obj.weight = req.body.weight;
+            personaldetails_obj.address1 = req.body.address1;
+            personaldetails_obj.city = req.body.city;
+            personaldetails_obj.state = req.body.state;
+            personaldetails_obj.isDoingJob = req.body.isDoingJob;
+
+            Personal.updateOne({
+                    _id: result.personaldetails
+                },
+                personaldetails_obj
+            ).then(result1 => {
+                req.session.isVerfied = true;
+                console.log("1")
+                res.send("1");
+            }).catch(err => {
+
+                console.log(err)
+                console.log("0")
+                res.send("0");
+            })
+        }).catch(err => {
+            console.log(err);
+            console.log("0")
+            res.send("0");
+        })
+    } else {
+        console.log("0")
+        res.send("0");
+    }
+
 }

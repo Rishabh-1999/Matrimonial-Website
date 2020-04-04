@@ -7,14 +7,16 @@ var favicon = require("serve-favicon");
 var mongoose = require("mongoose");
 var engine = require("ejs-mate");
 var morgan = require("morgan");
+
 require("dotenv").config();
+
 var app = express();
 var http = require("http");
 var server = http.Server(app);
 var PORT = process.env.PORT || 3000;
 
 /* DB */
-require("./static/db");
+require("./config/db");
 
 app.use(morgan("dev"));
 
@@ -82,6 +84,19 @@ app.get("/adddetails", middleware.checkSession, function (req, res) {
     res.render("adddetails", {
         data: req.session.data
     });
+});
+
+app.get("/profile", async function (req, res) {
+    await Users.findOne({
+        _id: req.session._id
+    }).populate("personaldetails").then((result, err) => {
+        if (err)
+            console.log(err)
+        console.log(result)
+        res.render("profile", {
+            data: result
+        });
+    })
 });
 
 server.listen(PORT, () => {

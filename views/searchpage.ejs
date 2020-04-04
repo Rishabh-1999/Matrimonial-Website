@@ -87,7 +87,8 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid p-5 col-12 d-inline-flex">
+
+    <div class="container-fluid ml-lg-3 mr-lg-3 p-3 col-12 d-inline-flex">
         <div class="row col-10">
             <input class="form-control col-10" id="searchinput" type="search" placeholder="Search"
                 aria-label="Search" />
@@ -97,7 +98,7 @@
             <i class="fa fa-filter logo" style="font-size: 25px;"></i>
         </a>
     </div>
-    <div class="container-fluid m-2 p-2" id="maincontainer">
+    <div class="container-fluid p-2" id="maincontainer">
         <!-- <div class="container mr-auto border border-dark rounded">
             <div id="can-create-community">
                 <div class="col-sm-12" style="display: flex;">
@@ -242,12 +243,12 @@
         }
 
         function addToDOM(obj) {
-            var div1 = `<div class="container mr-auto border border-dark rounded">
-            <div id="can-create-community">
+            var div1 = `<div id="${obj._id}" class="container mr-auto border border-dark mb-3 rounded" style="background-color:#d6d6d6">
+            <div id="card">
                 <div class="col-sm-12" style="display: flex;">
                     <div class="col-sm-2" style="padding:10px;flex:1;">
                         <img src="${obj.photourl}"
-                            class="cpic img-fluid" style="width: 200px;height: 200px;" />
+                            class="pic figure-img img-fluid" style="width: 200px;height: 200px;" />
                     </div>
 
                     <div class="col-sm-10 text-lg-left" style="padding:20px;">
