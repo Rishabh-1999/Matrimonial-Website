@@ -7,12 +7,12 @@
     <title>Search :</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/range.css" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="/script/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 </head>
 
 <body>
@@ -60,13 +60,6 @@
                                 <option value="Muslim">Muslim</option>
                                 <option value="Christanity">Christanity</option>
                             </select>
-                        </div>
-
-                        <div>
-                            <label>Height</label>
-                            <br />
-
-                            <input type="text" value="" />
                         </div>
 
                         <div class="col-auto my-1">
@@ -177,7 +170,6 @@
             xml.onload = function () {
                 document.getElementById('searchinput').innerHTML = "";
                 var d = JSON.parse(xml.responseText);
-                console.log(d);
                 tempdata = d;
                 for (var i = 0; i < tempdata.length; i++) {
                     addToDOM(tempdata[i])
@@ -189,14 +181,26 @@
         }
 
         function searchdata() {
-            let obj = {
-                minage: document.getElementById("min").value,
-                maxage: document.getElementById("max").value,
-                education: document.getElementById("education").value,
-                religion: document.getElementById("religion").value,
-                start: start,
-                end: end,
+            let obj = new Object();
+            if (document.getElementById("min").value != '') {
+                obj.minage = document.getElementById("min").value
             }
+            if (document.getElementById("max").value != '') {
+                obj.maxage = document.getElementById("max").value
+            }
+            if (document.getElementById("education").value != 'Choose...') {
+                obj.education = document.getElementById("education").value
+            }
+            if (document.getElementById("religion").value != 'Choose...') {
+                obj.religion = document.getElementById("religion").value
+            }
+            if (document.getElementById("searchinput").value != '') {
+                obj.searchinput = document.getElementById("searchinput").value
+            }
+
+            obj.start = start;
+            obj.end = end;
+
             document.getElementById('searchinput').innerHTML = "";
             document.getElementById("maincontainer").innerHTML = ""
             var xml = new XMLHttpRequest()
@@ -206,7 +210,6 @@
                 var d = JSON.parse(xml.responseText);
                 if (d == [] || d == null)
                     return;
-                console.log(d);
                 tempdata = d;
                 for (var i = 0; i < tempdata.length; i++) {
                     addToDOM(tempdata[i])
@@ -219,7 +222,6 @@
         }
 
         function getDocumentHeight() {
-            console.log("getDocumentHeight");
             const body = document.body;
             const html = document.documentElement;
 
@@ -271,13 +273,15 @@
         }
 
         document.getElementById('searchinput').onkeyup = function () {
-            document.getElementById('search').innerHTML = ""
-            var val = document.getElementById('searchinput').value;
-            for (i in tempdata) {
+            // document.getElementById('maincontainer').innerHTML = ""
+            // var val = document.getElementById('searchinput').value;
+            // console.log(tempdata)
+            // for (i in tempdata) {
 
-                if ((tempdata[i].name).includes(val) || (tempdata[i].description).includes(val))
-                    addToDOM(tempdata[i])
-            }
+            //     if ((tempdata[i].name).includes(val) || (tempdata[i].description).includes(val))
+            //         addToDOM(tempdata[i])
+            // }
+            searchdata()
         }
     </script>
 </body>

@@ -1,15 +1,14 @@
 /* Models */
 var Users = require("../models/users");
 var Personal = require("../models/personaldetails");
+//var Recomandation = require("../models/recomandation")
 
 module.exports.checkLogin = async function (req, res) {
-    console.log(req.body)
     Users.findOne({
                 email: req.body.email,
                 password: req.body.password,
             },
             function (err, result) {
-                console.log(result)
                 if (result) {
                     req.session.isLogin = 1;
                     req.session._id = result._id;
@@ -24,7 +23,6 @@ module.exports.checkLogin = async function (req, res) {
                     ob.DOB = result.DOB;
                     ob.type = result.type;
                     req.session.data = ob;
-                    console.log("------------" + result.isVerfied)
                     if (result.isVerfied == true) {
                         res.send("Logined")
                     } else {
@@ -95,25 +93,32 @@ exports.getAllByPagingfunction = async function (req, res, next) {
 
 exports.getLimitedByPagingfunction = async function (req, res, next) {
 
-    console.log(req.body);
     let query = {};
 
-    if (req.body.religion && req.body.minage && req.body.maxage && req.body.education) {
-        query = {
-            religion: req.body.religion,
-            "age": {
-                $gt: parseInt(req.body.minage),
-                $lt: parseInt(req.body.maxage)
-            },
-            "education": req.body.education,
+    if (req.body.religion) {
+        query["religion"] = req.body.religion;
+    }
+    if (req.body.minage && req.body.maxage) {
+        query["age"] = {
+            $gt: parseInt(req.body.minage),
+            $lt: parseInt(req.body.maxage)
         };
     }
+    if (req.body.education) {
+        query["education"] = req.body.education;
+    }
+    var query1 = {};
+    if (req.body.searchinput) {
+        query1["firstname"] = {
+            $regex: req.body.searchinput
+        };
+    }
+    query1["gender"] = req.session.gender == "Male" ? "Male" : "Female";
 
     console.log(query);
+    console.log(query1);
 
-    Users.find({
-        gender: req.session.gender == "Male" ? "Male" : "Female"
-    }).populate({
+    Users.find(query1).populate({
         path: "personaldetails",
         model: "personaldetails",
         match: query
@@ -121,11 +126,10 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
         if (error)
             console.log(error)
 
-        //console.log(result)
         result = result.filter(function (r) {
             return r.personaldetails != null;
         })
-        //console.log(result)
+
         res.send(result);
     })
 }
@@ -137,8 +141,11 @@ exports.logout_person = (req, res) => {
 }
 
 exports.updateprofile = (req, res) => {
+<<<<<<< HEAD
 
     // res.send("1")
+=======
+>>>>>>> 5188ff5472bec4e11e6b60cac70bf6f71514f8b4
     if (req.body.firstname != null && req.body.email != null && req.body.gender != null &&
         req.body.photourl != null && req.body.middlename != null && req.body.lastname &&
         req.body.religion != null && req.body.DOB != null && req.body.mothertongue != null &&
@@ -180,21 +187,16 @@ exports.updateprofile = (req, res) => {
                 personaldetails_obj
             ).then(result1 => {
                 req.session.isVerfied = true;
-                console.log("1")
                 res.send("1");
             }).catch(err => {
 
                 console.log(err)
-                console.log("0")
                 res.send("0");
             })
         }).catch(err => {
             console.log(err);
-            console.log("0")
             res.send("0");
         })
-    } else {
-        console.log("0")
         res.send("0");
     }
 
