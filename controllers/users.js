@@ -141,11 +141,6 @@ exports.logout_person = (req, res) => {
 }
 
 exports.updateprofile = (req, res) => {
-<<<<<<< HEAD
-
-    // res.send("1")
-=======
->>>>>>> 5188ff5472bec4e11e6b60cac70bf6f71514f8b4
     if (req.body.firstname != null && req.body.email != null && req.body.gender != null &&
         req.body.photourl != null && req.body.middlename != null && req.body.lastname &&
         req.body.religion != null && req.body.DOB != null && req.body.mothertongue != null &&
@@ -203,19 +198,17 @@ exports.updateprofile = (req, res) => {
 }
 
 exports.getAllProfiles = (req, res) => {
-    if(req.session.data.gender == 'Male')
-    {
+    if (req.session.data.gender == 'Male') {
         var data = 'Female';
-    }
-    else
-    {
+    } else {
         var data = 'Male';
     }
-    Users.find({"gender" : data}, function(error,result)
-    {
-        if(error)
-        throw error;
+    Users.find({
+        "gender": data
+    }, function (error, result) {
+        if (error)
+            throw error;
         else
-          res.send(JSON.stringify(result));
+            res.send(JSON.stringify(result));
     })
 }
