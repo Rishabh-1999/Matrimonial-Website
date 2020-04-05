@@ -70,7 +70,7 @@ app.get("/peronaldetails", middleware.checkSession, function (req, res) {
         _id: req.session._id
     }).populate("personaldetails").exec(function (err, result) {
         if (err)
-            console.log(result);
+            console.log(err);
     });
 });
 
@@ -92,7 +92,6 @@ app.get("/profile", async function (req, res) {
     }).populate("personaldetails").then((result, err) => {
         if (err)
             console.log(err)
-        console.log(result)
         res.render("profile", {
             data: result
         });

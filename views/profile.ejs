@@ -154,15 +154,12 @@
             xml.setRequestHeader("Content-Type", "application/json");
             xml.addEventListener('load', function () {
                 var result = xml.responseText;
-                console.log(result)
                 if (result == "1")
                     window.location = "/home"
                 else
                     window.alert("Due to Some to reason update failed")
-                //window
             })
             xml.send(JSON.stringify(obj));
-            console.log(obj)
         })
     </script>
 </body>
