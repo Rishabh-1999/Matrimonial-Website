@@ -30,4 +30,6 @@ app.post('/getAllByPagingfunction', middleware.checkSession, controllers.users.g
 
 app.post('/getLimitedByPagingfunction', middleware.checkSession, controllers.users.getLimitedByPagingfunction);
 
+app.use("/getAllProfiles", controllers.users.getAllProfiles);
+
 module.exports = app;

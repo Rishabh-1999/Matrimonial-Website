@@ -137,7 +137,7 @@ exports.logout_person = (req, res) => {
 }
 
 exports.updateprofile = (req, res) => {
-    console.log(req.body);
+
     // res.send("1")
     if (req.body.firstname != null && req.body.email != null && req.body.gender != null &&
         req.body.photourl != null && req.body.middlename != null && req.body.lastname &&
@@ -198,4 +198,22 @@ exports.updateprofile = (req, res) => {
         res.send("0");
     }
 
+}
+
+exports.getAllProfiles = (req, res) => {
+    if(req.session.data.gender == 'Male')
+    {
+        var data = 'Female';
+    }
+    else
+    {
+        var data = 'Male';
+    }
+    Users.find({"gender" : data}, function(error,result)
+    {
+        if(error)
+        throw error;
+        else
+          res.send(JSON.stringify(result));
+    })
 }
