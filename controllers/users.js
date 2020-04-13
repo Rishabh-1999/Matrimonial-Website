@@ -1,7 +1,12 @@
 /* Models */
 var Users = require("../models/users");
 var Personal = require("../models/personaldetails");
-//var Recomandation = require("../models/recomandation")
+
+const {
+    updateEducation,
+    updateReligion,
+    updateMinAndMaxAge
+} = require("../models/recommendation")
 
 module.exports.checkLogin = async function (req, res) {
     Users.findOne({
@@ -97,15 +102,18 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
 
     if (req.body.religion) {
         query["religion"] = req.body.religion;
+        await updateReligion(req, req.body.religion);
     }
     if (req.body.minage && req.body.maxage) {
         query["age"] = {
             $gt: parseInt(req.body.minage),
             $lt: parseInt(req.body.maxage)
         };
+        await updateMinAndMaxAge(req, req.body.minage, req.body.maxage);
     }
     if (req.body.education) {
         query["education"] = req.body.education;
+        await updateEducation(req, req.body.education);
     }
     var query1 = {};
     if (req.body.searchinput) {
@@ -122,13 +130,15 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
         path: "personaldetails",
         model: "personaldetails",
         match: query
-    }).skip(req.body.start).limit(req.body.end).exec(function (error, result) {
+    }).exec(function (error, result) {
+        console.log(result)
         if (error)
             console.log(error)
 
         result = result.filter(function (r) {
             return r.personaldetails != null;
         })
+        //Christians
 
         res.send(result);
     })

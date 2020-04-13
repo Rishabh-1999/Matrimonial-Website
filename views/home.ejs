@@ -52,15 +52,14 @@
 </body>
 
 <script>
-    
     var request1 = new XMLHttpRequest();
-    request1.open('GET','/userTable/getAllProfiles');
+    request1.open('GET', '/userTable/getRecommendationUser');
     request1.send();
-    request1.onload = function() {
-      var data = JSON.parse(request1.responseText);
-      for(i in data) {
-        addToDom(data[i]);
-      }
+    request1.onload = function () {
+        var data = JSON.parse(request1.responseText);
+        for (i in data) {
+            addToDom(data[i]);
+        }
     }
 
     function addToDom(obj) {
@@ -113,7 +112,6 @@
         document.getElementById("profiless").appendChild(div);
 
     }
-
 </script>
 
 </html>

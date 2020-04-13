@@ -1,7 +1,9 @@
 var mongoose = require("mongoose");
 
 var Personal = require("./personaldetails");
-
+var {
+    Recommendation
+} = require("./recommendation");
 const GENDERS = ["Male", "Female"];
 
 var Schema = mongoose.Schema,
@@ -36,6 +38,10 @@ var loginSchema = new mongoose.Schema({
     personaldetails: {
         'type': mongoose.Schema.Types.ObjectId,
         'ref': Personal,
+    },
+    recommendationdetails: {
+        'type': mongoose.Schema.Types.ObjectId,
+        'ref': Recommendation,
     },
     type: {
         type: String,

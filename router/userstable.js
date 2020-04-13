@@ -24,12 +24,14 @@ app.post("/registerUser", controllers.users.registerUser);
 app.post("/updateprofile", controllers.users.updateprofile);
 
 /* logout person */
-app.use("/logout_person", controllers.users.logout_person);
+app.get("/logout_person", controllers.users.logout_person);
 
 app.post('/getAllByPagingfunction', middleware.checkSession, controllers.users.getAllByPagingfunction);
 
 app.post('/getLimitedByPagingfunction', middleware.checkSession, controllers.users.getLimitedByPagingfunction);
 
-app.use("/getAllProfiles", controllers.users.getAllProfiles);
+app.get('/getRecommendationUser', controllers.recommendation.getRecommendationUser)
+
+app.get("/getAllProfiles", controllers.users.getAllProfiles);
 
 module.exports = app;

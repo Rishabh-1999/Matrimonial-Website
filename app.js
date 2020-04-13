@@ -2,7 +2,7 @@ const express = require("express");
 var session = require("express-session");
 var mongoStore = require("connect-mongo")(session);
 var bodyParser = require("body-parser");
-const path = require("path");
+var path = require("path");
 var favicon = require("serve-favicon");
 var mongoose = require("mongoose");
 var engine = require("ejs-mate");
@@ -47,6 +47,9 @@ app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+/* Models */
+var Users = require("./models/users");
+
 /* Routing Implementation */
 app.use("/userTable", require("./router/userstable"));
 
@@ -62,8 +65,6 @@ app.get("/home", middleware.checkSession, function (req, res) {
         data: req.session.data
     });
 });
-
-var Users = require("./models/users");
 
 app.get("/peronaldetails", middleware.checkSession, function (req, res) {
     Users.findOne({
