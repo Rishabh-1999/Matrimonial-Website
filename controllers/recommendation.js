@@ -23,9 +23,6 @@ async function getRecommendation(id) {
 
         if (err)
             console.log(err)
-        else {
-            //  console.log(respond_data)
-        }
     })
     return respond_data;
 }
@@ -33,7 +30,6 @@ async function getRecommendation(id) {
 exports.getRecommendationUser = async function (req, res) {
 
     var recommendation_data = await getRecommendation(req.session._id);
-    console.log(recommendation_data)
 
     let query = {};
 
@@ -63,7 +59,6 @@ exports.getRecommendationUser = async function (req, res) {
         result = result.filter(function (r) {
             return r.personaldetails != null;
         })
-        //        console.log(result)
         res.send(result);
     })
 }

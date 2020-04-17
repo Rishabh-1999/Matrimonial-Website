@@ -17,10 +17,12 @@ var personaldetailsSchema = new mongoose.Schema({
         trim: true
     },
     DOB: {
-        type: String
+        type: String,
+        required: true
     },
     age: {
-        type: Number
+        type: Number,
+        required: true
     },
     mothertongue: {
         type: String,
@@ -32,30 +34,41 @@ var personaldetailsSchema = new mongoose.Schema({
     },
     education: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     height: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     weight: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     address1: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     city: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     state: {
         type: String,
-        trim: true
+        trim: true,
+        default: "-"
     },
     isDoingJob: {
         type: Boolean,
+        default: false
+    },
+    user: {
+        'type': mongoose.Schema.Types.ObjectId,
+        'ref': "users",
     },
 });
 

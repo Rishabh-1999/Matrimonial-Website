@@ -1,10 +1,10 @@
 var mongoose = require("mongoose");
 
+/* Models */
 var Personal = require("./personaldetails");
 var {
     Recommendation
 } = require("./recommendation");
-const GENDERS = ["Male", "Female"];
 
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
@@ -23,7 +23,6 @@ var loginSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ["Male", "Female"],
         required: true
     },
     password: {
@@ -45,6 +44,7 @@ var loginSchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        required: true
     },
     isVerfied: {
         type: Boolean,

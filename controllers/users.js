@@ -1,12 +1,19 @@
 /* Models */
 var Users = require("../models/users");
 var Personal = require("../models/personaldetails");
+var recommendation = require("../models/recommendation");
+
+/* Utils */
+var {
+    getAge
+} = require("../config/utils")
 
 const {
     updateEducation,
     updateReligion,
-    updateMinAndMaxAge
-} = require("../models/recommendation")
+    updateMinAndMaxAge,
+    Recommendation,
+} = require("../models/recommendation");
 
 module.exports.checkLogin = async function (req, res) {
     Users.findOne({
@@ -14,6 +21,10 @@ module.exports.checkLogin = async function (req, res) {
                 password: req.body.password,
             },
             function (err, result) {
+
+                if (err)
+                    new Error("Error while LoginIn");
+
                 if (result) {
                     req.session.isLogin = 1;
                     req.session._id = result._id;
@@ -28,76 +39,120 @@ module.exports.checkLogin = async function (req, res) {
                     ob.DOB = result.DOB;
                     ob.type = result.type;
                     req.session.data = ob;
-                    if (result.isVerfied == true) {
-                        res.send("Logined")
-                    } else {
-                        res.send("NoData");
-                    }
+
+                    res.send("Logined");
+                } else {
+                    res.send("NoData");
                 }
             }
         )
         .select("+password")
-        .catch(err => {
+        .catch((err) => {
             res.send(error);
         });
 };
 
 exports.registerUser = async function (req, res) {
-    let personaldetails = new Personal({
-        middlename: "",
-        lastname: req.body.lastname,
-        religion: "-",
-        mothertougne: "-",
-        phoneno: "-",
-        education: "-",
-        height: "-",
-        weight: "-",
-        isDoingJob: false
+
+    let user_obj = await new Users({
+        firstname: req.body.firstname,
+        email: req.body.email,
+        type: "User",
+        gender: req.body.gender,
+        password: req.body.password,
+        isVerfied: false,
+        isActive: false
     });
-    personaldetails
-        .save()
-        .then(data => {
-            let u = new Users({
-                firstname: req.body.firstname,
-                email: req.body.email,
-                type: "User",
-                gender: req.body.gender,
-                password: req.body.password,
-                DOB: "",
-                photourl: "",
-                isVerfied: false,
-                isActive: false,
-                personaldetails: data._id
+    await user_obj.save()
+        .then(async data_user => {
+            let cal_age = await getAge(req.body.dob);
+
+            let personaldetails_obj = new Personal({
+                lastname: req.body.lastname,
+                DOB: req.body.dob,
+                age: parseInt(cal_age),
+                isDoingJob: false,
+                user: data_user._id
             });
-            u.save()
-                .then(data => {
-                    console.log("New User created");
+            personaldetails_obj
+                .save()
+                .then(async data_personaldetails => {
+                    data_user.personaldetails = data_personaldetails._id;
+                    let recommendation_obj = new Recommendation({
+                        religion: [],
+                        education: [],
+                        user: data_user._id,
+                        minage: cal_age - 5,
+                        maxage: cal_age + 1
+                    })
+                    recommendation_obj.save().then(data_rec => {
+                        data_user.recommendationdetails = data_rec._id;
+                        data_user.save()
+                        res.redirect("1");
+                    }).catch(err => {
+                        console.log(err)
+                    });
                 })
-                .catch(err => {
-                    console.log(err)
-                });
         })
         .catch(err => {
             console.log(err)
         });
-    res.send("data saved");
+
+    //   let personaldetails = new Personal({
+    //     middlename: "",
+    //     lastname: req.body.lastname,
+    //     religion: "-",
+    //     mothertougne: "-",
+    //     phoneno: "-",
+    //     education: "-",
+    //     height: "-",
+    //     weight: "-",
+    //     isDoingJob: false,
+    //   });
+    //   personaldetails
+    //     .save()
+    //     .then((data) => {
+    //       let u = new Users({
+    //         firstname: req.body.firstname,
+    //         email: req.body.email,
+    //         type: "User",
+    //         gender: req.body.gender,
+    //         password: req.body.password,
+    //         DOB: "",
+    //         photourl: "",
+    //         isVerfied: false,
+    //         isActive: false,
+    //         personaldetails: data._id,
+    //       });
+    //       u.save()
+    //         .then((data1) => {
+    //           console.log("New User created");
+    //         })
+    //         .catch((err) => {
+    //           //await CreateRecommendation(data,data1);
+    //           console.log(err);
+    //         });
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    //   res.send("data saved");
 };
 
 exports.getAllByPagingfunction = async function (req, res, next) {
-
     Users.find({
-        gender: req.session.gender == "Male" ? "Male" : "Female"
-    }).populate(
-        "personaldetails"
-    ).skip(req.body.start).limit(req.body.end).exec(function (error, result) {
-        if (error)
-            console.log(error)
-        res.send(result);
-    })
-}
+            gender: req.session.gender == "Male" ? "Male" : "Female",
+        })
+        .populate("personaldetails")
+        .skip(req.body.start)
+        .limit(req.body.end)
+        .exec(function (error, result) {
+            if (error) console.log(error);
+            res.send(result);
+        });
+};
 
 exports.getLimitedByPagingfunction = async function (req, res, next) {
-
     let query = {};
 
     if (req.body.religion) {
@@ -107,7 +162,7 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
     if (req.body.minage && req.body.maxage) {
         query["age"] = {
             $gt: parseInt(req.body.minage),
-            $lt: parseInt(req.body.maxage)
+            $lt: parseInt(req.body.maxage),
         };
         await updateMinAndMaxAge(req, req.body.minage, req.body.maxage);
     }
@@ -118,44 +173,53 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
     var query1 = {};
     if (req.body.searchinput) {
         query1["firstname"] = {
-            $regex: req.body.searchinput
+            $regex: req.body.searchinput,
         };
     }
     query1["gender"] = req.session.gender == "Male" ? "Male" : "Female";
 
-    console.log(query);
-    console.log(query1);
-
-    Users.find(query1).populate({
-        path: "personaldetails",
-        model: "personaldetails",
-        match: query
-    }).exec(function (error, result) {
-        console.log(result)
-        if (error)
-            console.log(error)
-
-        result = result.filter(function (r) {
-            return r.personaldetails != null;
+    Personal.find(query)
+        .populate({
+            path: "user",
+            model: "users",
+            match: query1,
         })
-        //Christians
+        .skip(req.body.start)
+        .limit(req.body.end)
+        .exec(function (error, result) {
+            if (error) console.log(error);
 
-        res.send(result);
-    })
-}
+            result = result.filter(function (r) {
+                return r.user != null;
+            });
+
+            res.send(result);
+        });
+};
 
 exports.logout_person = (req, res) => {
     req.session.isLogin = 0;
     req.session.destroy();
-    res.render('login');
-}
+    res.render("login");
+};
 
 exports.updateprofile = (req, res) => {
-    if (req.body.firstname != null && req.body.email != null && req.body.gender != null &&
-        req.body.photourl != null && req.body.middlename != null && req.body.lastname &&
-        req.body.religion != null && req.body.DOB != null && req.body.mothertongue != null &&
-        req.body.phoneno != null && req.body.weight != null && req.body.height != null &&
-        req.body.address1 != null && req.body.city != null && req.body.state != null &&
+    if (
+        req.body.firstname != null &&
+        req.body.email != null &&
+        req.body.gender != null &&
+        req.body.photourl != null &&
+        req.body.middlename != null &&
+        req.body.lastname &&
+        req.body.religion != null &&
+        req.body.DOB != null &&
+        req.body.mothertongue != null &&
+        req.body.phoneno != null &&
+        req.body.weight != null &&
+        req.body.height != null &&
+        req.body.address1 != null &&
+        req.body.city != null &&
+        req.body.state != null &&
         req.body.isDoingJob != null
     ) {
         var user_obj = new Object();
@@ -166,59 +230,63 @@ exports.updateprofile = (req, res) => {
         user_obj.isVerfied = true;
 
         Users.updateOne({
-            _id: req.session._id
-        }, user_obj).then(result => {
-            var personaldetails_obj = new Object();
-            personaldetails_obj.middlename = req.body.middlename;
-            personaldetails_obj.lastname = req.body.lastname;
-            personaldetails_obj.religion = req.body.religion;
-            personaldetails_obj.DOB = req.body.DOB;
-            personaldetails_obj.mothertongue = req.body.mothertongue;
-            personaldetails_obj.phoneno = req.body.phoneno;
-            // education: {
-            //     type: String,
-            //     trim: true
-            // },
-            personaldetails_obj.height = req.body.height;
-            personaldetails_obj.weight = req.body.weight;
-            personaldetails_obj.address1 = req.body.address1;
-            personaldetails_obj.city = req.body.city;
-            personaldetails_obj.state = req.body.state;
-            personaldetails_obj.isDoingJob = req.body.isDoingJob;
-
-            Personal.updateOne({
-                    _id: result.personaldetails
+                    _id: req.session._id,
                 },
-                personaldetails_obj
-            ).then(result1 => {
-                req.session.isVerfied = true;
-                res.send("1");
-            }).catch(err => {
+                user_obj
+            )
+            .then((result) => {
+                var personaldetails_obj = new Object();
+                personaldetails_obj.middlename = req.body.middlename;
+                personaldetails_obj.lastname = req.body.lastname;
+                personaldetails_obj.religion = req.body.religion;
+                personaldetails_obj.DOB = req.body.DOB;
+                personaldetails_obj.mothertongue = req.body.mothertongue;
+                personaldetails_obj.phoneno = req.body.phoneno;
+                // education: {
+                //     type: String,
+                //     trim: true
+                // },
+                personaldetails_obj.height = req.body.height;
+                personaldetails_obj.weight = req.body.weight;
+                personaldetails_obj.address1 = req.body.address1;
+                personaldetails_obj.city = req.body.city;
+                personaldetails_obj.state = req.body.state;
+                personaldetails_obj.isDoingJob = req.body.isDoingJob;
 
-                console.log(err)
-                res.send("0");
+                Personal.updateOne({
+                            _id: result.personaldetails,
+                        },
+                        personaldetails_obj
+                    )
+                    .then((result1) => {
+                        req.session.isVerfied = true;
+                        res.send("1");
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.send("0");
+                    });
             })
-        }).catch(err => {
-            console.log(err);
-            res.send("0");
-        })
+            .catch((err) => {
+                console.log(err);
+                res.send("0");
+            });
         res.send("0");
     }
-
-}
+};
 
 exports.getAllProfiles = (req, res) => {
-    if (req.session.data.gender == 'Male') {
-        var data = 'Female';
+    if (req.session.data.gender == "Male") {
+        var data = "Female";
     } else {
-        var data = 'Male';
+        var data = "Male";
     }
     Users.find({
-        "gender": data
-    }, function (error, result) {
-        if (error)
-            throw error;
-        else
-            res.send(JSON.stringify(result));
-    })
-}
+            gender: data,
+        },
+        function (error, result) {
+            if (error) throw error;
+            else res.send(JSON.stringify(result));
+        }
+    );
+};

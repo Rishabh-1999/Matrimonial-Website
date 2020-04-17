@@ -8,9 +8,8 @@ submit.addEventListener("click", function () {
         xml.open("POST", "/userTable/checkLogin");
         xml.addEventListener("load", function () {
             var data = xml.responseText;
-            if (data === "Logined") {
+            if (data === "Logined")
                 window.location = "/home";
-            } else if (data === "NoData") window.location = "/profile";
             else addInvalidDOM();
         });
         xml.setRequestHeader("Content-Type", "application/json");

@@ -16,10 +16,12 @@ var recommendationSchema = new mongoose.Schema({
     }
   }],
   minage: {
-    type: Number
+    type: Number,
+    required: true
   },
   maxage: {
-    type: Number
+    type: Number,
+    required: true
   },
   education: [{
     name: {
@@ -28,21 +30,6 @@ var recommendationSchema = new mongoose.Schema({
     count: {
       type: Number
     }
-  }],
-  height: {
-    type: String,
-    trim: true,
-  },
-  weight: {
-    type: String,
-    trim: true,
-  },
-  state: {
-    type: String,
-    trim: true,
-  },
-  isDoingJob: [{
-    type: Boolean,
   }],
 });
 
@@ -61,8 +48,6 @@ async function updateReligion(req, religiond) {
       "religion.$.count": 1
     },
   }, async function (err, result) {
-    // console.log("result")
-    //console.log(result)
     if (result.n == 0) {
       await Recommendation.updateOne({
         user: req.session._id,
@@ -79,7 +64,6 @@ async function updateReligion(req, religiond) {
 }
 
 async function updateEducation(req, education_data) {
-  //console.log(education_data)
   Recommendation.updateOne({
     user: req.session._id,
     education: {
@@ -92,7 +76,6 @@ async function updateEducation(req, education_data) {
       "education.$.count": 1
     },
   }, async function (err, result) {
-    //console.log(result)
     if (result.n == 0) {
       await Recommendation.updateOne({
         user: req.session._id,
