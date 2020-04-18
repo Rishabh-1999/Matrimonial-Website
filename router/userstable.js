@@ -26,9 +26,7 @@ app.post("/updateprofile", controllers.users.updateprofile);
 /* logout person */
 app.get("/logout_person", controllers.users.logout_person);
 
-app.post('/getAllByPagingfunction', middleware.checkSession, controllers.users.getAllByPagingfunction);
-
-app.post('/getLimitedByPagingfunction', middleware.checkSession, controllers.users.getLimitedByPagingfunction);
+app.post('/getDataByPagingfunction', middleware.checkSession, controllers.users.getDataByPagingfunction);
 
 app.get('/getRecommendationUser', controllers.recommendation.getRecommendationUser)
 

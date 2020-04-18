@@ -10,7 +10,7 @@ function checkSession(req, res, next) {
         if (req.session.isVerfied == true)
             next();
         else
-            res.redirect("/profile")
+            res.redirect("/editprofile")
     } else res.redirect("/");
 }
 

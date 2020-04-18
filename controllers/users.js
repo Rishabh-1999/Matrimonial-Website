@@ -139,20 +139,7 @@ exports.registerUser = async function (req, res) {
     //   res.send("data saved");
 };
 
-exports.getAllByPagingfunction = async function (req, res, next) {
-    Users.find({
-            gender: req.session.gender == "Male" ? "Male" : "Female",
-        })
-        .populate("personaldetails")
-        .skip(req.body.start)
-        .limit(req.body.end)
-        .exec(function (error, result) {
-            if (error) console.log(error);
-            res.send(result);
-        });
-};
-
-exports.getLimitedByPagingfunction = async function (req, res, next) {
+exports.getDataByPagingfunction = async function (req, res, next) {
     let query = {};
 
     if (req.body.religion) {
@@ -184,15 +171,13 @@ exports.getLimitedByPagingfunction = async function (req, res, next) {
             model: "users",
             match: query1,
         })
-        .skip(req.body.start)
-        .limit(req.body.end)
         .exec(function (error, result) {
             if (error) console.log(error);
 
             result = result.filter(function (r) {
                 return r.user != null;
             });
-
+            result = result.splice(req.body.start, req.body.start + req.body.end)
             res.send(result);
         });
 };

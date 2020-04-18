@@ -87,13 +87,13 @@ app.get("/adddetails", middleware.checkSession, function (req, res) {
     });
 });
 
-app.get("/profile", async function (req, res) {
+app.get("/editprofile", async function (req, res) {
     await Users.findOne({
         _id: req.session._id
     }).populate("personaldetails").then((result, err) => {
         if (err)
             console.log(err)
-        res.render("profile", {
+        res.render("editprofile", {
             data: result
         });
     })
