@@ -24,8 +24,8 @@ function addToDom(obj) {
 
     var img = document.createElement('img');
     img.setAttribute("class", "card-img-top");
-    img.style.height = '200px';
-    img.style.width = '200px';
+    img.style.height = '250px';
+    img.style.width = '250px';
     img.src = obj.photourl;
 
     div3.appendChild(img);

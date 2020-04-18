@@ -108,16 +108,17 @@ function addToDOM(obj) {
     var div1 = `<div id="${obj._id}" class="container mr-auto border border-dark mb-3 rounded" style="background-color:#d6d6d6">
             <div id="card">
                 <div class="col-sm-12" style="display: flex;">
-                    <div class="col-sm-2" style="padding:10px;flex:1;">
-                        <img src="${obj.photourl}"
-                            class="pic figure-img img-fluid" style="width: 200px;height: 200px;" />
+                    <div class="col-sm-3" style="padding:5px;flex:1;">
+                        <img src="${obj.user.photourl}"
+                            class="pic figure-img img-fluid"  />
                     </div>
 
-                    <div class="col-sm-10 text-lg-left" style="padding:20px;">
-                        <h4><b>Name :</b>${obj.firstname} ${obj.personaldetails.lastname}</h4>
-                        <h4><b>Age :</b>${obj.personaldetails.age}</h4>
-                        <h4><b>Hightest Education :</b>${obj.personaldetails.education}</h4>
-                        <h4><b>Religion :</b>${obj.personaldetails.religion}</h4>
+                    <div class="col-sm-9 text-lg-left" style="padding:20px;">
+                    <div style="margin-top : 40px">
+                        <h4><b>Name : </b>${obj.user.firstname} ${obj.lastname}</h4>
+                        <h4><b>Age : </b>${obj.age}</h4>
+                        <h4><b>Hightest Education : </b>${obj.education}</h4>
+                        <h4><b>Religion : </b>${obj.religion}</h4>
                     </div>
                 </div>
             </div>
@@ -130,16 +131,17 @@ function addToDOMLimited(obj) {
     var div1 = `<div id="${obj._id}" class="container mr-auto border border-dark mb-3 rounded" style="background-color:#d6d6d6">
             <div id="card">
                 <div class="col-sm-12" style="display: flex;">
-                    <div class="col-sm-2" style="padding:10px;flex:1;">
+                    <div class="col-sm-3" style="padding:5px;flex:1;">
                         <img src="${obj.user.photourl}"
-                            class="pic figure-img img-fluid" style="width: 200px;height: 200px;" />
+                            class="pic figure-img img-fluid"  />
                     </div>
 
-                    <div class="col-sm-10 text-lg-left" style="padding:20px;">
-                        <h4><b>Name :</b>${obj.user.firstname} ${obj.lastname}</h4>
-                        <h4><b>Age :</b>${obj.age}</h4>
-                        <h4><b>Hightest Education :</b>${obj.education}</h4>
-                        <h4><b>Religion :</b>${obj.religion}</h4>
+                    <div class="col-sm-9 text-lg-left" style="padding:20px;">
+                    <div style="margin-top : 40px">
+                        <h4><b>Name : </b>${obj.user.firstname} ${obj.lastname}</h4>
+                        <h4><b>Age : </b>${obj.age}</h4>
+                        <h4><b>Hightest Education : </b>${obj.education}</h4>
+                        <h4><b>Religion : </b>${obj.religion}</h4>
                     </div>
                 </div>
             </div>

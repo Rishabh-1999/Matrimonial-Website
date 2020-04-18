@@ -20,41 +20,44 @@
         <h1 class="h2 text-center">Update Profile</h1>
         <div class="m-10">
             <div class="card">
-                <div class="card-body">
+              
+                    <div class="container-fluid">
+                        
+                     <div class="col-sm-12">
                     <!-- <form> -->
                     <div class="form-label-group">
-                        <label>*Photo URL</label>
+                        <label>Photo URL <span style="color:red;">*</span></label>
                         <input type="name" id="photourl" class="form-control" name="photourl" placeholder="photourl"
                             value="<%= data.photourl %>" required autofocus />
                     </div>
                     <div class="form-label-group">
-                        <label>*First Name</label>
+                        <label>First Name <span style="color:red;">*</span></label>
                         <input type="name" id="firstname" readonly class="form-control disabled" name="firstname"
                             placeholder="Name" value="<%= data.firstname %>" required autofocus />
                     </div>
                     <div class="form-label-group">
-                        <label>Middle Name</label>
+                        <label>Middle Name <span style="color:red;">*</span></label>
                         <input type="name" id="middlename" class="form-control" name="middlename" placeholder="Name"
                             value="<%= data.personaldetails.middlename %>" autofocus />
                     </div>
                     <div class="form-label-group">
-                        <label>*Last Name</label>
+                        <label>Last Name <span style="color:red;">*</span></label>
                         <input type="name" id="lastname" value="<%= data.personaldetails.lastname %>"
                             class="form-control" name="lastname" placeholder="Name" required autofocus />
                     </div>
                     <div class="form-label-group">
-                        <label>*Email ID </label>
+                        <label>Email ID <span style="color:red;">*</span></label>
                         <input type="email" readonly id="email" class="form-control disabled" name="email"
                             value="<%= data.email %>" placeholder="Email address" required autofocus />
                     </div>
                     <div class="form-label-group">
-                        <label>*Phone No. </label>
+                        <label>Phone No. <span style="color:red;">*</span></label>
                         <input type="number" id="phoneno" class="form-control" name="phoneno"
                             value="<%= data.personaldetails.phoneno %>" placeholder="Phone No." required />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label>*Gender</label>
+                            <label>Gender <span style="color:red;">*</span></label>
                             <select class="form-control" value="<%= data.gender %>" id="gender" name="gender" required>
                                 <option name="Male">Male</option>
                                 <option name="Female">Female</option>
@@ -62,7 +65,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>*Religion</label>
+                            <label>Religion <span style="color:red;">*</span></label>
                             <select class="form-control" value="<%= data.religion %>" id="religion" name="religion"
                                 required>
                                 <option name="Hindu">Hindu</option>
@@ -72,48 +75,48 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>*DOB :</label>
+                            <label>DOB : <span style="color:red;">*</span></label>
                             <input type="date" class="form-control disabled dobDate"
                                 value="<%= data.personaldetails.DOB %>" id="DOB" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputAddress">Mother Tongue</label>
+                        <label for="inputAddress">Mother Tongue <span style="color:red;">*</span></label>
                         <input type="text" class="form-control" id="mothertongue" name="mothertongue"
                             value="<%= data.personaldetails.mothertongue %>" placeholder="Mother Tongue">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label>Height :</label>
+                            <label>Height : <span style="color:red;">*</span></label>
                             <input type="text" class="form-control" value="<%= data.personaldetails.height %>"
                                 id="height">
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Weight :</label>
+                            <label>Weight : <span style="color:red;">*</span></label>
                             <input type="text" class="form-control" value="<%= data.personaldetails.weight %>"
                                 id="weight">
                         </div>
                         <div class="form-group col-md-4">
-                            <label>*Doing Job :</label>
+                            <label>*Doing Job : <span style="color:red;">*</span></label>
                             <input type="checkbox" class="form-control" value="<%= data.personaldetails.isDoingJob %>"
                                 id="isDoingJob" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress">Address</label>
+                        <label for="inputAddress">Address <span style="color:red;">*</span></label>
                         <input type="text" class="form-control" id="address1" name="address1"
                             value="<%= data.personaldetails.address1 %>" placeholder="Address">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
+                            <label for="inputCity">City <span style="color:red;">*</span></label>
                             <input type="text" class="form-control" id="city" name="city"
                                 value="<%= data.personaldetails.city %>">
                         </div>
                         <div class="form-group">
-                            <label for="inputZip">State</label>
+                            <label for="inputZip">State <span style="color:red;">*</span></label>
                             <input type="text" name="state" class="form-control" id="state"
                                 value="<%= data.personaldetails.state %>">
                         </div>
@@ -124,6 +127,7 @@
                         </button>
                     </div>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
