@@ -5,49 +5,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Matrimonial : Login</title>
-
-  <link rel="stylesheet" href="./css/login.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/login.css">
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card my-5">
-          <div class="card-body">
-            <h1 class="text-center display-3" sty><i class="fa fa-pagelines"></i></h1>
+ <div class="container">
+      <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+             <h1 class="text-center display-3" sty><i class="fa fa-pagelines"></i></h1>
             <center>
               <h3>Welcome to Matrimonial</h3>
             </center>
-            <h5 class="text-center"> Sign In </h5>
-            <div id="addInvalid"></div>
-            <div class="form-label-group">
-              <label for="inputEmail"> Email address </label>
-              <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="#" class="active" id="login-form-link">Login</a>
+              </div>
+              <div class="col-xs-6">
+                <a href="#" id="register-form-link">Register</a>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                  <div class="form-group">
+                     <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required
                 autofocus>
+                  </div>
+                  <div class="form-group">
+                     <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="login-submit" id="submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                      </div>
+                    </div>
+                  </div>
+                  
+                </form>
+                <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                  <div class="form-group">
+                   <label>First Name</label>
+                            <input type="name" id="first_name" class="form-control" name="name" placeholder="Name"
+                                required autofocus />
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                            <input type="name" id="last_name" class="form-control" name="name" placeholder="Name"
+                                required autofocus />
+                  </div>
+                  <div class="form-group">
+                   <label> Email </label>
+                            <input type="email" id="user_email" class="form-control" name="email"
+                                placeholder="Email address" required autofocus />
+                  </div>
+                  <div class="form-group">
+                    <label> Password </label>
+                            <input type="text" id="user_password" class="form-control" name="password"
+                                placeholder="Password" required />
+                  </div>
+                  <div class="form-group">
+                    <label> Phone No. </label>
+                            <input type="number" id="user_phoneno" class="form-control" name="phoneno"
+                                placeholder="Phone No." required />
+                  </div>
+                  <div class="form-group">
+                     <label>Gender</label>
+                            <select class="form-control" id="user_gender" name="gender" required>
+                                <option name="Male" value="Male" selected>Male</option>
+                                <option name="Female" value="Female">Female</option>
+                                <option name="Other">Other</option>
+                            </select>
+                  </div>
+                  <div class="form-group">
+                    <label> DOB </label>
+                            <input type="date" class="form-control" id="user_dob" name="dob" placeholder="DOB"
+                                required />
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="user_submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div class="form-label-group">
-              <label for="inputPassword"> Password </label>
-              <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
-            </div>
-            <div style="margin:10px;">
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" id="submit" type="submit"> Sign in
-              </button>
-            </div>
-            <hr class="md-4">
-            <p class="text-right"><a href="/userTable/register">Register Here!</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+<script src="/script/login-js.js"></script>
+  <script src="/script/userRegister.js"></script>
+<script>
+  $(function() {
 
-  <script href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <script src="/script/login-js.js"></script>
+    $('#login-form-link').click(function(e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});
+</script>
+
 </body>
 
 </html>

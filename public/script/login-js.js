@@ -2,6 +2,7 @@ var email = document.getElementById("email");
 var password = document.getElementById("password");
 var submit = document.getElementById("submit");
 var invalid = 1;
+
 submit.addEventListener("click", function () {
     if (!email.value == "" && !password.value == "") {
         var xml = new XMLHttpRequest();
@@ -10,7 +11,9 @@ submit.addEventListener("click", function () {
             var data = xml.responseText;
             if (data === "Logined")
                 window.location = "/home";
-            else addInvalidDOM();
+            else {
+                alert("Username/Password Incorrect")
+            }
         });
         xml.setRequestHeader("Content-Type", "application/json");
         xml.send(
@@ -21,15 +24,3 @@ submit.addEventListener("click", function () {
         );
     } else alert("Enter Value on field");
 });
-
-function addInvalidDOM() {
-    if (invalid) {
-        invalid = 0;
-        var center = document.getElementById("addInvalid");
-        var div = document.createElement("div");
-        div.setAttribute("class", "alert alert-danger");
-        div.setAttribute("style", "width:90%");
-        div.innerHTML = "Username/Password Incorrect.";
-        center.appendChild(div);
-    }
-}
