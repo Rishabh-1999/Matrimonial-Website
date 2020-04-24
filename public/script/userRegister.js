@@ -10,30 +10,10 @@ var user_dob = document.getElementById("user_dob");
 user_submit.addEventListener("click", function () {
 	if (first_name.value == '' || user_dob.value == null || last_name.value == '' || user_email.value == '' ||
 		user_gender.value == '' || user_phoneno.value == '' || user_password.value == '') {
-		$.confirm({
-			title: 'Fields ?',
-			content: "Field is Empty !! ",
-			draggable: true,
-			buttons: {
-				OK: {
-					btnClass: 'btn-danger any-other-class',
-					action: function () {}
-				},
-			}
-		});
+		alert('field is empty')
 		return;
 	} else if (user_phoneno.value.length < 10 || user_phoneno.value.length > 10) {
-		$.confirm({
-			title: 'Phone No ?',
-			content: "Phone No should be of length 10 !! ",
-			draggable: true,
-			buttons: {
-				OK: {
-					btnClass: 'btn-danger any-other-class',
-					action: function () {}
-				},
-			}
-		});
+		alert('Phone no is not correct')
 		return;
 	}
 	if (!ValidateEmail(user_email.value)) {
