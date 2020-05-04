@@ -99,6 +99,12 @@ app.get("/editprofile", async function (req, res) {
     })
 });
 
+app.get("/manage_people", middleware.checkSession, function (req, res) {
+    res.render("manage_people", {
+        data: req.session.data
+    });
+});
+
 server.listen(PORT, () => {
     console.log("Running on port: " + PORT);
 });
