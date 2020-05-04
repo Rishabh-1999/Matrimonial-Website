@@ -52,6 +52,7 @@ var Users = require("./models/users");
 
 /* Routing Implementation */
 app.use("/userTable", require("./router/userstable"));
+app.use("/admin", require("./router/admin"));
 
 /* Middleware */
 var middleware = require("./middlewares/middleware");
