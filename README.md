@@ -272,7 +272,7 @@ npm install bcrpty
         <img src="https://avatars1.githubusercontent.com/u/38110540?v=4" alt="Avatar" style="width:200px; height:200px; border-radius: 5px 5px 0 0;">
         <div style="padding: 2px 16px;">
           <h4><b>Ridhav Modi</b></h4>
-          <p>Database controller Manager (MongoDB).</p>
+          <p>Database Manager (MongoDB).</p>
           <p>Tester</p>
         </div>
       </div>
