@@ -1,12 +1,16 @@
+<img src="https://www.chitkara.edu.in/chitkara-university-logo.png" />
+
 # Matrimonial-Website
 
 A matrimonial website with a custom inbuilt Recommender system for finding a suitable bride or groom. Recommender system will use many attributes to find a suitable partner according to specification or data entered.
+
+This was made for **Chitkara University** as a Project for AWS Course.
 
 ```
 npm start or node app.js
 ```
 
-It will run under the url http://127.0.0.1:3000/
+It will run under the url http://127.0.0.1:3000/ 
 
 Email and Password for Online Website:<br>
 
@@ -268,7 +272,7 @@ npm install bcrpty
         <img src="https://avatars1.githubusercontent.com/u/38110540?v=4" alt="Avatar" style="width:200px; height:200px; border-radius: 5px 5px 0 0;">
         <div style="padding: 2px 16px;">
           <h4><b>Ridhav Modi</b></h4>
-          <p>Database controller and manager (MongoDB).</p>
+          <p>Database controller Manager (MongoDB).</p>
           <p>Tester</p>
         </div>
       </div>
