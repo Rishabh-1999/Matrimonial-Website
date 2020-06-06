@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white sticky-top">
-    <a class="navbar-brand" href="/home">Matrimonial</a>
+    <a class="navbar-brand" href="/user/home">Matrimonial</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,30 +7,26 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <% if(data.type == "User"){ %> 
+            <% if(data.type == "User"){ %>
             <li class="nav-item">
-                <a class="nav-link" href="/home">Home</a>
+                <a class="nav-link" href="/user/home">Home</a>
             </li>
-        <% } %>    
+            <% } %>
             <li class="nav-item">
-                <a class="nav-link" href="/editprofile">Your Profile</a>
+                <a class="nav-link" href="/user/editprofile">Your Profile</a>
             </li>
-        <% if(data.type == "User"){ %>     
+            <% if(data.type == "User"){ %>
             <li class="nav-item">
-                <a class="nav-link" href="/searchpage">Search People</a>
+                <a class="nav-link" href="/user/searchpage">Search People</a>
             </li>
-        <% } %>
+            <% } %>
 
-        <% if(data.type == "Admin"){ %>     
+            <% if(data.type == "Admin"){ %>
             <li class="nav-item">
-                <a class="nav-link" href="/manage_people">Manage People</a>
+                <a class="nav-link" href="/admin/manage_people">Manage People</a>
             </li>
-        <% } %>
+            <% } %>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
         <ul class="navbar-nav pr-5">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -57,13 +53,11 @@
             buttons: {
                 Yes: {
                     action: function () {
-                        window.location = "/userTable/logout_person";
+                        window.location = "/user/logout";
                     }
                 },
                 No: {
-                    action: function () {
-
-                    }
+                    action: function () {}
                 },
             }
         });

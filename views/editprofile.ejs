@@ -5,135 +5,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Profile - <%= data.firstname %></title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+    <!-- SCRIPT -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </head>
 
 <body>
     <% include paritials/navbar.ejs %>
 
     <div class="container-fluid">
-        <h1 class="h2 text-center">Update Profile</h1>
+        <h1 class="h2 text-center m-3"><u>Update Profile</u></h1>
         <div class="m-10">
             <div class="card">
-              
-                    <div class="container-fluid">
-                        
-                     <div class="col-sm-12">
-                    <!-- <form> -->
-                    <div class="form-label-group">
-                        <label>Photo URL <span style="color:red;">*</span></label>
-                        <input type="name" id="photourl" class="form-control" name="photourl" placeholder="photourl"
-                            value="<%= data.photourl %>" required autofocus />
-                    </div>
-                    <div class="form-label-group">
-                        <label>First Name <span style="color:red;">*</span></label>
-                        <input type="name" id="firstname" readonly class="form-control disabled" name="firstname"
-                            placeholder="Name" value="<%= data.firstname %>" required autofocus />
-                    </div>
-                    <div class="form-label-group">
-                        <label>Middle Name <span style="color:red;">*</span></label>
-                        <input type="name" id="middlename" class="form-control" name="middlename" placeholder="Name"
-                            value="<%= data.personaldetails.middlename %>" autofocus />
-                    </div>
-                    <div class="form-label-group">
-                        <label>Last Name <span style="color:red;">*</span></label>
-                        <input type="name" id="lastname" value="<%= data.personaldetails.lastname %>"
-                            class="form-control" name="lastname" placeholder="Name" required autofocus />
-                    </div>
-                    <div class="form-label-group">
-                        <label>Email ID <span style="color:red;">*</span></label>
-                        <input type="email" readonly id="email" class="form-control disabled" name="email"
-                            value="<%= data.email %>" placeholder="Email address" required autofocus />
-                    </div>
-                    <div class="form-label-group">
-                        <label>Phone No. <span style="color:red;">*</span></label>
-                        <input type="number" id="phoneno" class="form-control" name="phoneno"
-                            value="<%= data.personaldetails.phoneno %>" placeholder="Phone No." required />
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Gender <span style="color:red;">*</span></label>
-                            <select class="form-control" value="<%= data.gender %>" id="gender" name="gender" required>
-                                <option name="Male">Male</option>
-                                <option name="Female">Female</option>
-                                <option name="Other">Other</option>
-                            </select>
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <form>
+                            <div class="form-label-group">
+                                <label><span style="color:red;">*</span>Photo URL :</label>
+                                <input type="name" id="photourl" class="form-control" name="photourl"
+                                    placeholder="Photo URL" value="<%= data.photourl %>" required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label><span style="color:red;">*</span>First Name :</label>
+                                <input type="name" id="firstname" class="form-control disabled" name="firstname"
+                                    placeholder="First Name" value="<%= data.firstname %>" required autofocus
+                                    readonly />
+                            </div>
+                            <div class="form-label-group">
+                                <label>Middle Name :</label>
+                                <input type="name" id="middlename" class="form-control" name="middlename"
+                                    placeholder="Middle Name" value="<%= data.personaldetails.middlename %>"
+                                    autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label><span style="color:red;">*</span>Last Name :</label>
+                                <input type="name" id="lastname" value="<%= data.personaldetails.lastname %>"
+                                    class="form-control" name="lastname" placeholder="Last Name" required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label><span style="color:red;">*</span>Email ID :</label>
+                                <input type="email" id="email" class="form-control disabled" name="email"
+                                    value="<%= data.email %>" placeholder="Email ID" readonly required autofocus />
+                            </div>
+                            <div class="form-label-group">
+                                <label><span style="color:red;">*</span>Phone No.:</label>
+                                <input type="number" id="phoneno" class="form-control" name="phoneno"
+                                    value="<%= data.personaldetails.phoneno %>" placeholder="Phone No." required />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>Gender :</label>
+                                    <select class="form-control" value="<%= data.gender %>" id="gender" name="gender"
+                                        required>
+                                        <option name="Male">Male</option>
+                                        <option name="Female">Female</option>
+                                        <option name="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>Religion :</label>
+                                    <select class="form-control" value="<%= data.religion %>" id="religion"
+                                        name="religion" required>
+                                        <option name="Hindu">Hindu</option>
+                                        <option name="Muslim">Muslim</option>
+                                        <option name="Christians">Christians</option>
+                                        <option name="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>DOB :</label>
+                                    <input type="date" class="form-control disabled dobDate"
+                                        value="<%= data.personaldetails.DOB %>" id="DOB" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress"><span style="color:red;">*</span>Mother Tongue :</label>
+                                <input type="text" class="form-control" id="mothertongue" name="mothertongue"
+                                    value="<%= data.personaldetails.mothertongue %>" placeholder="Mother Tongue">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>Height :</label>
+                                    <input type="text" class="form-control" value="<%= data.personaldetails.height %>"
+                                        id="height">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>Weight : </label>
+                                    <input type="text" class="form-control" value="<%= data.personaldetails.weight %>"
+                                        id="weight">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><span style="color:red;">*</span>Doing Job :</label>
+                                    <input type="checkbox" class="form-control"
+                                        value="<%= data.personaldetails.isDoingJob %>" id="isDoingJob" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><span style="color:red;">*</span>Address :</label>
+                                <input type="text" class="form-control" id="address1" name="address1"
+                                    value="<%= data.personaldetails.address1 %>" placeholder="Address">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label><span style="color:red;">*</span>City :</label>
+                                    <input type="text" class="form-control" id="city" name="city"
+                                        value="<%= data.personaldetails.city %>">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label><span style="color:red;">*</span>State :</label>
+                                    <input type="text" name="state" class="form-control" id="state"
+                                        value="<%= data.personaldetails.state %>">
+                                </div>
+                            </div>
+                        </form>
+                        <div style="margin:10px;">
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" id="submit" type="submit">
+                                Update Profile
+                            </button>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label>Religion <span style="color:red;">*</span></label>
-                            <select class="form-control" value="<%= data.religion %>" id="religion" name="religion"
-                                required>
-                                <option name="Hindu">Hindu</option>
-                                <option name="Muslim">Muslim</option>
-                                <option name="Christians">Christians</option>
-                                <option name="Others">Others</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>DOB : <span style="color:red;">*</span></label>
-                            <input type="date" class="form-control disabled dobDate"
-                                value="<%= data.personaldetails.DOB %>" id="DOB" required>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputAddress">Mother Tongue <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" id="mothertongue" name="mothertongue"
-                            value="<%= data.personaldetails.mothertongue %>" placeholder="Mother Tongue">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label>Height : <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" value="<%= data.personaldetails.height %>"
-                                id="height">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Weight : <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" value="<%= data.personaldetails.weight %>"
-                                id="weight">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>*Doing Job : <span style="color:red;">*</span></label>
-                            <input type="checkbox" class="form-control" value="<%= data.personaldetails.isDoingJob %>"
-                                id="isDoingJob" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputAddress">Address <span style="color:red;">*</span></label>
-                        <input type="text" class="form-control" id="address1" name="address1"
-                            value="<%= data.personaldetails.address1 %>" placeholder="Address">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="city" name="city"
-                                value="<%= data.personaldetails.city %>">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputZip">State <span style="color:red;">*</span></label>
-                            <input type="text" name="state" class="form-control" id="state"
-                                value="<%= data.personaldetails.state %>">
-                        </div>
-                    </div>
-                    <div style="margin:10px;">
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" id="submit" type="submit">
-                            Update Profile
-                        </button>
-                    </div>
-                    </form>
-                </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="/script/editprofile-js.js"></script>
+    <script type="text/javascript" src="/script/editprofile-js.js"></script>
 </body>
 
 </html>

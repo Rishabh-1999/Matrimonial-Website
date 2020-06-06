@@ -1,11 +1,10 @@
-var mongoose = require("mongoose");
-var ObjectId = require('mongodb').ObjectID;
-
 /* Models */
+var mongoose = require("mongoose");
 
 var recommendationSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId
+    'type': mongoose.Schema.Types.ObjectId,
+    'ref': "users",
   },
   religion: [{
     name: {
@@ -34,36 +33,40 @@ var recommendationSchema = new mongoose.Schema({
 });
 
 var Recommendation = mongoose.model("recommendations", recommendationSchema);
+module.exports.Recommendation = Recommendation;
 
-async function updateReligion(req, religiond) {
+module.exports.updateReligion = async (req, religion_data) => {
   Recommendation.updateOne({
     user: req.session._id,
     religion: {
       $elemMatch: {
-        name: religiond
+        name: religion_data
       }
     }
   }, {
     $inc: {
       "religion.$.count": 1
     },
-  }, async function (err, result) {
+  }).then(async (result) => {
     if (result.n == 0) {
       await Recommendation.updateOne({
         user: req.session._id,
       }, {
         $push: {
           religion: {
-            "name": religiond,
+            "name": religion_data,
             "count": 1
           }
         }
       })
     }
+  }).catch((err) => {
+    console.log(err)
+    throw err;
   });
 }
 
-async function updateEducation(req, education_data) {
+module.exports.updateEducation = async (req, education_data) => {
   Recommendation.updateOne({
     user: req.session._id,
     education: {
@@ -75,7 +78,7 @@ async function updateEducation(req, education_data) {
     $inc: {
       "education.$.count": 1
     },
-  }, async function (err, result) {
+  }).then(async (result) => {
     if (result.n == 0) {
       await Recommendation.updateOne({
         user: req.session._id,
@@ -88,25 +91,21 @@ async function updateEducation(req, education_data) {
         }
       })
     }
+  }).catch((err) => {
+    console.log(err)
+    throw err
   });
 }
 
-async function updateMinAndMaxAge(req, minage_data, maxage_data) {
+module.exports.updateMinAndMaxAge = async (req, minage_data, maxage_data) => {
   Recommendation.findOne({
     user: req.session._id
-  }, function (err, result) {
-    if (err)
-      console.log(err)
-
+  }).then((result) => {
     result.minage = Math.ceil((result.minage + Number(minage_data)) / 2);
     result.maxage = Math.ceil((result.maxage + Number(maxage_data)) / 2);
-
     result.save();
-
+  }).catch((err) => {
+    console.log(err);
+    throw err
   })
 }
-
-module.exports.Recommendation = Recommendation;
-module.exports.updateReligion = updateReligion;
-module.exports.updateMinAndMaxAge = updateMinAndMaxAge;
-module.exports.updateEducation = updateEducation;

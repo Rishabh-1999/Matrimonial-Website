@@ -19,14 +19,15 @@ document.getElementById("submit").addEventListener("click", function () {
     obj.isDoingJob = document.getElementById("isDoingJob").value;
 
     var xml = new XMLHttpRequest();
-    xml.open("POST", "/userTable/updateprofile");
+    xml.open("POST", "/user/updateprofile");
     xml.setRequestHeader("Content-Type", "application/json");
     xml.addEventListener('load', function () {
         var result = xml.responseText;
-        if (result == "1")
-            window.location = "/home"
-        else
-            window.alert("Due to Some to reason update failed")
+        if (result == "201") {
+            alert("Profile Updated")
+            window.location = "/user/home"
+        } else
+            window.alert("Due to Some to reason profile update failed")
     })
     xml.send(JSON.stringify(obj));
 })

@@ -1,4 +1,4 @@
-async function getAge(dateString) {
+module.exports.getAge = async (dateString) => {
     var today = new Date();
     var birthDate = new Date(dateString);
     var age = today.getFullYear() - birthDate.getFullYear();
@@ -8,5 +8,3 @@ async function getAge(dateString) {
     }
     return age;
 }
-
-module.exports.getAge = getAge;

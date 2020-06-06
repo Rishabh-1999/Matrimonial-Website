@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- editprofile.firstname %>'s Profile</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" />
+
+    <!-- SCRIPT -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+</head>
+
+<body>
+    <% include paritials/navbar.ejs %>
+
+    <div class="container-fluid">
+        <h1 class="h2 text-center m-3">
+            <u><%- editprofile.firstname %> <%- editprofile.personaldetails.middlename %> <%-
+                editprofile.personaldetails.lastname %></u>
+        </h1>
+        <div class="m-10">
+            <div class="card">
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <div class="d-flex m-5">
+                            <div class="col-sm-4 m-2 d-inline-flex">
+                                <img src="<%- editprofile.photourl %>" class="card-img-top"
+                                    style="height: 250px; width: 250px;" />
+                            </div>
+                            <div class="col-sm-4 m-2">
+                                <div class="form-label-group">
+                                    <label><span style="color:red;">*</span>First Name :</label>
+                                    <input type="name" id="firstname" class="form-control disabled" name="firstname"
+                                        placeholder="First Name" value="<%- editprofile.firstname %>" readonly />
+                                </div>
+                                <div class="form-label-group">
+                                    <label>Middle Name :</label>
+                                    <input type="name" id="middlename" class="form-control disabled" name="middlename"
+                                        placeholder="Middle Name" value="<%- editprofile.personaldetails.middlename %>"
+                                        autofocus readonly />
+                                </div>
+                                <div class="form-label-group">
+                                    <label><span style="color:red;">*</span>Last Name :</label>
+                                    <input type="name" id="lastname" value="<%- editprofile.personaldetails.lastname %>"
+                                        class="form-control disabled" name="lastname" placeholder="Last Name" required
+                                        autofocus readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-label-group">
+                            <label><span style="color:red;">*</span>Email ID :</label>
+                            <input type="email" id="email" class="form-control disabled" name="email"
+                                value="<%- editprofile.email %>" placeholder="Email ID" readonly required autofocus />
+                        </div>
+                        <div class="form-label-group">
+                            <label><span style="color:red;">*</span>Phone No.:</label>
+                            <input type="number" id="phoneno" class="form-control disabled" name="phoneno"
+                                value="<%- editprofile.personaldetails.phoneno %>" placeholder="Phone No." readonly
+                                required />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>Gender :</label>
+                                <input type="text" id="gender" class="form-control disabled" name="gender"
+                                    value="<%- editprofile.gender %>" placeholder="Gender" readonly required />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>Religion :</label>
+                                <input type="text" id="religion" class="form-control disabled" name="religion"
+                                    value="<%- editprofile.personaldetails.religion %>" placeholder="religion" readonly
+                                    required />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>DOB :</label>
+                                <input type="text" class="form-control disabled dobDate"
+                                    value="<%- editprofile.personaldetails.DOB %>" id="DOB" readonly required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress"><span style="color:red;">*</span>Mother Tongue :</label>
+                            <input type="text" class="form-control" id="mothertongue" name="mothertongue"
+                                value="<%- editprofile.personaldetails.mothertongue %>" placeholder="Mother Tongue"
+                                readonly>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>Height :</label>
+                                <input type="text" class="form-control"
+                                    value="<%- editprofile.personaldetails.height %>" id="height" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>Weight : </label>
+                                <input type="text" class="form-control"
+                                    value="<%- editprofile.personaldetails.weight %>" id="weight" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label><span style="color:red;">*</span>Doing Job :</label>
+                                <input type="text" class="form-control"
+                                    checked="<%- editprofile.personaldetails.isDoingJob %>" id="isDoingJob" required
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><span style="color:red;">*</span>Address :</label>
+                            <input type="text" class="form-control" id="address1" name="address1"
+                                value="<%- editprofile.personaldetails.address1 %>" placeholder="Address" readonly>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label><span style="color:red;">*</span>City :</label>
+                                <input type="text" class="form-control" id="city" name="city"
+                                    value="<%- editprofile.personaldetails.city %>" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><span style="color:red;">*</span>State :</label>
+                                <input type="text" name="state" class="form-control" id="state"
+                                    value="<%- editprofile.personaldetails.state %>" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

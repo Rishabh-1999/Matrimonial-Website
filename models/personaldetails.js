@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 var personaldetailsSchema = new mongoose.Schema({
     middlename: {
         type: String,
-        trim: true
+        trim: true,
+        default: ""
     },
     lastname: {
         type: String,
@@ -26,44 +27,47 @@ var personaldetailsSchema = new mongoose.Schema({
     },
     mothertongue: {
         type: String,
-        trim: true
+        trim: true,
+        default: ""
     },
     phoneno: {
         type: String,
-        trim: true
+        trim: true,
+        default: ""
     },
     education: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     height: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     weight: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     address1: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     city: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     state: {
         type: String,
         trim: true,
-        default: "-"
+        default: ""
     },
     isDoingJob: {
         type: Boolean,
+        required: true,
         default: false
     },
     user: {

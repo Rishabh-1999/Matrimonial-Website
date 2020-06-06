@@ -1,7 +1,12 @@
+/* Models */
 const mongoose = require("mongoose");
+
 mongoose.Promise = global.Promise;
 mongoose.set("useCreateIndex", true);
-mongoose.set('debug', true)
+
+if (process.env.NODE_ENV != "production") {
+  mongoose.set('debug', true);
+}
 
 mongoose.connect(
   process.env.DB_MONGO, {

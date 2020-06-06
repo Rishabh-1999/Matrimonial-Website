@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html >
-    <head>
-        <title>Manage People</title>
-        <meta name="viewport" content="width=device-width" initial-scale="1.0">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script type="text/javascript" src="/script/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <link rel="stylesheet" type="text/css" href="css/datatables.css">
-        <link type="text/css" href="css/datatables.min.css">
-</head>
-    <body class="body">
-        <% include paritials/navbar.ejs %>
-       <div>
-			<table class="table table-bordered" id="managePeople">
-  				<thead>
-    			<tr>
-       					<th>First Name</th>
-       					<th>Email</th>
-       				 	<th>Gender</th>
-       				 	<th>Type</th>
-       				 	<th>isVerified</th>
-      			</tr>
-   				</thead>
-   				<tbody id="list"></tbody>
-  			</table>
-		</div>
-   
-<script type="text/javascript" src="script/datatables.js"></script>
-<script type="text/javascript" src="script/datatables.min.js"></script>
-<script type="text/javascript" src="script/manage_user.js"></script>
+<html>
 
+<head>
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <title>Manage Users</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="/css/datatables.css">
+    <link rel="stylesheet" href="/css/datatables.min.css">
+
+    <!-- SCRIPT -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/script/datatables.js"></script>
+    <script type="text/javascript" src="/script/datatables.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+</head>
+
+<body class="body">
+    <% include paritials/navbar.ejs %>
+    <div class="m-5">
+        <table class="table table-bordered" id="managePeople">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Type</th>
+                    <th>isVerified</th>
+                </tr>
+            </thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript" src="/script/manage_user.js"></script>
 </body>
+
 </html>

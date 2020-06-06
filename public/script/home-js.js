@@ -1,12 +1,16 @@
-var request1 = new XMLHttpRequest();
-request1.open('GET', '/userTable/getRecommendationUser');
-request1.send();
-request1.onload = function () {
-    var data = JSON.parse(request1.responseText);
-    for (i in data) {
-        addToDom(data[i]);
+$(function () {
+    var request1 = new XMLHttpRequest();
+    request1.open('GET', '/user/getRecommendationUser');
+    request1.setRequestHeader("Content-Type", "application/json");
+    request1.onload = function () {
+        var data = JSON.parse(request1.responseText);
+        document.getElementById("profiless").innerHTML = ""
+        for (i in data) {
+            addToDom(data[i]);
+        }
     }
-}
+    request1.send();
+})
 
 function addToDom(obj) {
 
@@ -42,7 +46,7 @@ function addToDom(obj) {
     p.innerHTML = "Description 2";
 
     var a = document.createElement('a');
-    a.src = "#"
+    a.href = "/user/" + obj._id
     a.setAttribute("class", "btn btn-primary");
     a.innerHTML = "Check details";
 

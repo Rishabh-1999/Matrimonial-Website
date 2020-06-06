@@ -32,7 +32,8 @@ var loginSchema = new mongoose.Schema({
     },
     photourl: {
         type: String,
-        trim: true
+        trim: true,
+        default: ""
     },
     personaldetails: {
         'type': mongoose.Schema.Types.ObjectId,
@@ -49,10 +50,12 @@ var loginSchema = new mongoose.Schema({
     isVerfied: {
         type: Boolean,
         default: false,
+        required: true
     },
     isActive: {
         type: Boolean,
         default: true,
+        required: true
     },
 });
 
