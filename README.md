@@ -13,6 +13,22 @@ npm start or node app.js or nodemon app.js
 It will run under the url http://127.0.0.1:3000/ 
 
 Email and Password for Online Website:<br>
+- Admin
+  - Email    : admin@gmail.com
+  - Password : admin
+- Users
+  - 1
+     - Email    : salamkhan@gmail.com
+     - Password : salamkhan
+   - 2
+     - Email    : kareena@gmail.com
+     - Password : kareena
+   - 3
+     - Email    : akshay@gmail.com
+     - Password : akshay
+     
+``` Note : All Email ID are fake and used for development ```
+
 
 ## Pre-requisites
 
