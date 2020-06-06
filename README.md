@@ -2,12 +2,12 @@
 
 # Matrimonial-Website
 
-A matrimonial website with a custom inbuilt Recommender system for finding a suitable bride or groom. Recommender system will use many attributes to find a suitable partner according to specification or data entered.
+A matrimonial website with a custom inbuilt Recommender system for finding a suitable bride or groom. Recommender system will use many paramters to find a suitable partner according to specification or data entered.
 
-This was made for **Chitkara University** as a Project for AWS Course.
+This was made for **Chitkara University** as a Project for AWS Course Subject.
 
 ```
-npm start or node app.js
+npm start or node app.js or nodemon app.js
 ```
 
 It will run under the url http://127.0.0.1:3000/ 
@@ -50,8 +50,8 @@ Here we used **Hybrid Recommendation System** combining collaborative filtering 
 | peronaldetails          | Reference       | Yes      | No     | No        |
 | recommendationdetails   | Reference       | Yes      | No     | No        |
 | type ( Role )           | String          | Yes      | No     | No        |
-| isVerfied               | Bollean       | Yes      | No     | No        |
-| isActive                | Bollean       | Yes      | No     | No        |
+| isVerfied               | Bollean         | Yes      | No     | No        |
+| isActive                | Bollean         | Yes      | No     | No        |
 
 <h4><b>Personal Details Schema</b></h4>
 
@@ -80,7 +80,7 @@ Here we used **Hybrid Recommendation System** combining collaborative filtering 
 | user            | Reference       | 
 | religion        | Array of Object |
 | minage          | Number          |
-| maxage          | String          |
+| maxage          | Number          |
 | education       | Array of Object |
 
 <h5><b>religion Object</b></h5>
@@ -193,13 +193,12 @@ npm install bcrpty
 |   |
 |   |--- Controller
 |   |    |--- index.js
-|   |    |--- admin.js
 |   |    |--- recommendation.js
 |   |    |--- users.js
 |   |
 |   |--- Dump (Mongoose Dump) (Dump)
 |   |
-|   |--- Middleware
+|   |--- middlewares
 |   |    |--- middleware.js
 |   |
 |   |--- Models
@@ -216,16 +215,15 @@ npm install bcrpty
 |   |    |    |--- datatables.min.js
 |   |    |    |--- editprofile-js.js
 |   |    |    |--- home-js.js
-|   |    |    |--- login-js.js
+|   |    |    |--- loginandregister.js
 |   |    |    |--- manage_user-js.js
 |   |    |    |--- searchpage.js
-|   |    |    |--- userRegister.js
-|   |    |
-|   |    |--- index.html
 |   |
 |   |--- router
-|   |    |--- admin.js
-|   |    |--- userstable.js
+|   |    |--- index.js
+|   |    |--- Handlers
+|   |         |--- admin.js
+|   |         |--- user.js
 |   |
 |   |--- views
 |   |    |--- partials
@@ -234,10 +232,10 @@ npm install bcrpty
 |   |    |--- adddetails.ejs
 |   |    |--- editprofile.ejs
 |   |    |--- home.ejs
-|   |    |--- login.ejs
+|   |    |--- index.ejs
 |   |    |--- manage_people.ejs
-|   |    |--- registerUser.ejs
 |   |    |--- searchpage.ejs
+|   |    |--- user.ejs
 ```
 
 ## Contributers
