@@ -47,9 +47,11 @@ Email and Password for Online Website:<br>
   - Manage Users
 
 # Recommendation System
-A a recommendation system is a subclass of information filtering system that seeks to predict the "rating" or "preference" a user would give to an item.
-
-Here we used **Hybrid Recommendation System** combining collaborative filtering and content-based filtering. In this type of system more User *searches* , better the recommendation .Everytime user searches the data is used to improve the recommendation of particular user. Every user has their own recommendation data. Recommendation is based many factors shown in below table and how their evaluation is done.
+- Here we are using **Hybrid Recommendation System** combining collaborative filtering and content-based filtering.
+- In this type of system more User *searches* for their partner based on **filter and criteria**, better and accurate the recommendation User are.
+- It also sees and update recommendation as User click and searches a particular User which was generated from the early recommended User genersted from their data.
+- Every User has their own recommendation data, which will allow every User to find their parnter on their interest. 
+- Recommendation is based many factors shown in below table and how their evaluation is done.
 
 
 ## Schema
